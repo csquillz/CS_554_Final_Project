@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="../assets/css/photon.css" media="all" rel="stylesheet" type="text/css" />
+    <title>Document</title>
+</head>
+<style media="screen">
+    * {
+        cursor: default;
+    }
+    
+    body{
+        height: 100%;
+        -webkit-user-select: none;
+    }
+</style>
+<body>
+    <div class="window">
+        <header class="toolbar toolbar-header">
+            <div class="toolbar-actions">
+                <div class="btn-group">
+                    <button class="btn btn-default">
+                        <span class="icon icon-home"></span>
+                    </button>
+                    <button class="btn btn-default">
+                        <span class="icon icon-folder"></span>
+                    </button>
+                    <button class="btn btn-default active">
+                        <span class="icon icon-cloud"></span>
+                    </button>
+                    <button class="btn btn-default">
+                        <span class="icon icon-popup"></span>
+                    </button>
+                    <button class="btn btn-default">
+                        <span class="icon icon-shuffle"></span>
+                    </button>
+                </div>
+
+                <button class="btn btn-default">
+                    <span class="icon icon-home icon-text"></span>
+                    Filters
+                </button>
+
+                <button class="btn btn-default btn-dropdown pull-right">
+                    <span class="icon icon-megaphone"></span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Your app's content goes inside .window-content -->
+        <div class="window-content">
+            <div class="pane-group">
+                <div class="pane pane-sm sidebar">
+                    <nav class="nav-group">
+                        <h5 class="nav-group-title">Favorites</h5>
+                        <span class="nav-group-item">
+                            <span class="icon icon-home"></span> connors
+                        </span>
+                        <span class="nav-group-item active">
+                            <span class="icon icon-light-up"></span> Photon
+                        </span>
+                        <span class="nav-group-item">
+                            <span class="icon icon-download"></span> Downloads
+                        </span>
+                        <span class="nav-group-item">
+                            <span class="icon icon-folder"></span> Documents
+                        </span>
+                        <span class="nav-group-item">
+                            <span class="icon icon-window"></span> Applications
+                        </span>
+                        <span class="nav-group-item">
+                            <span class="icon icon-signal"></span> AirDrop
+                        </span>
+                        <span class="nav-group-item">
+                            <span class="icon icon-monitor"></span> Desktop
+                        </span>
+                    </nav>
+                </div>
+
+                <div class="pane">
+                    <table class="table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Kind</th>
+                                <th>Date Modified</th>
+                                <th>Author</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>bars.scss</td>
+                                <td>Document</td>
+                                <td>Oct 13, 2015</td>
+                                <td>connors</td>
+                            </tr>
+                            <tr>
+                                <td>base.scss</td>
+                                <td>Document</td>
+                                <td>Oct 13, 2015</td>
+                                <td>connors</td>
+                            </tr>
+                            <tr>
+                                <td>button-groups.scss</td>
+                                <td>Document</td>
+                                <td>Oct 13, 2015</td>
+                                <td>connors</td>
+                            </tr>
+                            <tr>
+                                <td>buttons.scss</td>
+                                <td>Document</td>
+                                <td>Oct 13, 2015</td>
+                                <td>connors</td>
+                            </tr>
+                            <tr>
+                                <td>docs.scss</td>
+                                <td>Document</td>
+                                <td>Oct 13, 2015</td>
+                                <td>connors</td>
+                            </tr>
+                            <tr>
+                                <td>forms.scss</td>
+                                <td>Document</td>
+                                <td>Oct 13, 2015</td>
+                                <td>connors</td>
+                            </tr>
+                            <tr>
+                                <td>grid.scss</td>
+                                <td>Document</td>
+                                <td>Oct 13, 2015</td>
+                                <td>connors</td>
+                            </tr>
+                            <tr>
+                                <td>icons.scss</td>
+                                <td>Document</td>
+                                <td>Oct 13, 2015</td>
+                                <td>connors</td>
+                            </tr>
+                            <tr>
+                                <td>images.scss</td>
+                                <td>Document</td>
+                                <td>Oct 13, 2015</td>
+                                <td>connors</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    const video = document.querySelector('form');
+    video.addEventListener('submit', (event) => {
+        console.log(event);
+    })
+</script>
+</html>

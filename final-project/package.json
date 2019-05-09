@@ -3,8 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@react-pdf/renderer": "^1.5.4",
+    "@react-pdf/styled-components": "github:react-pdf/styled-components",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-pdf": "^4.0.5",
+    "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8"
   },
   "scripts": {

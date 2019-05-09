@@ -12,6 +12,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.commentPanel{
+  display: inline-block;
+  position: fixed;
+}
 
 
 body {

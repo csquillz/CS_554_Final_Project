@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import logo from './logo.svg';
 import './App.css';
 import Chat from "./components/chatRoom"
+import pdfContainer from './component/pdfContainer';
 
 
 class App extends Component {
   render() {
     return (
-      <Router>
-      <div>
+      <Switch>
+     
         <Route exact path="/" component={Chat} />
+      <Route exact path='/pdf1' component={pdfContainer}/>
         
-      </div>
-    </Router>
+     
+    </Switch>
     );
   }
 }

@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
-
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import logo from './logo.svg';
 import './App.css';
+import Chat from "./components/chatRoom"
 import pdfContainer from './component/pdfContainer';
-import { PDFViewer } from '@react-pdf/renderer';
-import {NavLink, BrowserRouter as Router, Route,Switch} from 'react-router-dom';
-import pdf from './component/pdfindex'
-//import saiku from './component/saikuPdf'
-const App = () => {
-  return <Switch>
-    
+
+
+class App extends Component {
+  render() {
+    return (
+      <Switch>
+     
+        <Route exact path="/" component={Chat} />
       <Route exact path='/pdf1' component={pdfContainer}/>
-    
-      
-  </Switch>
-};
+        
+     
+    </Switch>
+    );
+  }
+}
 
 export default App;

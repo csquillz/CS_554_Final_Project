@@ -5,11 +5,17 @@
   "dependencies": {
     "@react-pdf/renderer": "^1.5.4",
     "@react-pdf/styled-components": "github:react-pdf/styled-components",
+    "install": "^0.12.2",
+    "npm": "^6.9.0",
+    "pdfjs-dist": "^2.0.943",
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-pdf": "^4.0.5",
+    "react-pdf-reader": "^0.1.8",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "2.1.8"
+    "react-scripts": "2.1.8",
+    "saiku-react-pdfjs": "^1.0.2"
   },
   "scripts": {
     "start": "react-scripts start",

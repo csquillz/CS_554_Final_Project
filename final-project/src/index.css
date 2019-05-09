@@ -60,3 +60,16 @@ form button:hover {
 .messages li:nth-child(odd) {
   background: #eee;
 }
+
+.addChatRoom{
+  display: inline-block;
+  position: initial;
+  vertical-align: top;
+  width: 10rem;
+  float: right;
+  padding-right: 2rem;
+}
+
+.chatTitle{
+  display: inline-block;
+}

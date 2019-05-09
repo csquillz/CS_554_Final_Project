@@ -9,17 +9,17 @@ class Chat extends React.Component {
         const username = prompt("Enter a username: ")
         this.state = {
             input: "",
+            roomInput: "",
             username,
             messages: [`${username} has joined the chat!`],
-            roomName: "CS554"
+            roomName: "CS554",
+            rooms: ["CS443", "General"]
         };
-
-
-        // console.log(this.state.username)bob
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleRoomChange = this.handleRoomChange.bind(this);
+        this.addRoom = this.addRoom.bind(this);
 
     }
 
@@ -48,15 +48,24 @@ class Chat extends React.Component {
         this.setState({ messages: [...this.state.messages, message] })
     }
 
-    handleChange(event) {
+    async addRoom(event) {
+        event.preventDefault();
+        let newRoom = this.state.roomInput
+        await this.setState({ rooms: [...this.state.rooms, newRoom] })
+        console.log(this.state.roomInput)
+        console.log(this.state.rooms)
+        this.setState({ roomInput: "" });
+    }
+
+    async handleChange(event) {
         this.setState({ [event.target.name]: event.target.value });
     }
 
-    handleRoomChange(event) {
+    async handleRoomChange(event) {
         let prevRoom = this.state.roomName
         let currRoom = event.target.value
-        this.setState({ roomName: currRoom });
-        
+        await this.setState({ roomName: currRoom });
+
         socket.emit("join_room", {
             username: this.state.username,
             prevRoom: prevRoom,
@@ -66,11 +75,11 @@ class Chat extends React.Component {
         // console.log(currRoom)
         // console.log(this.state.roomName)
         let emptyArr = []
-        this.setState({messages: emptyArr});
+        this.setState({ messages: emptyArr });
         // console.log(this.state.messages)
     }
 
-    handleSubmit(event) {
+    async handleSubmit(event) {
         event.preventDefault();
         this.addMessage(this.state.username + ": " + this.state.input);
         socket.emit("chat_message", {
@@ -84,17 +93,23 @@ class Chat extends React.Component {
     render() {
         return (
             <div>
-                <div>{this.state.roomName}</div>
-                <ul class="messages">
+                <div>
+                    <h1 className="chatTitle">{this.state.roomName}</h1>
+                    <form className="addChatRoom" onSubmit={this.addRoom}>
+                        <input type="text" value={this.state.roomInput} name="roomInput" onChange={this.handleChange} />
+                        <button type="submit" value="Submit">Add Room!</button>
+                    </form>
+                </div>
+                <ul className="messages">
                     {this.state.messages.map(item => (
                         <li key={item}>{item}</li>
                     ))}
                 </ul>
                 <form onSubmit={this.handleSubmit}>
                     <select id="room-selector" onChange={this.handleRoomChange}>
-                        <option name= "roomName" value="CS554" >CS 554</option>
-                        <option name= "roomName" value="general">General</option>
-                        <option name= "roomName" value="trains">Trains</option>
+                        {this.state.rooms.map((i) =>
+                            <option name= "roomName" key={i} value={i}>{i}</option>
+                        )}
                     </select>
                     <input type="text" value={this.state.input} name="input" onChange={this.handleChange} />
                     <button type="submit" value="Submit">Submit</button>

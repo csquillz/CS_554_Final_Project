@@ -10,12 +10,11 @@ class App extends Component {
   render() {
     return (
       <Switch>
-     
+
         <Route exact path="/" component={Chat} />
-      <Route exact path='/pdf1' component={pdfContainer}/>
-        
-     
-    </Switch>
+        <Route exact path='/pdfViewer' component={pdfContainer} />
+
+      </Switch>
     );
   }
 }

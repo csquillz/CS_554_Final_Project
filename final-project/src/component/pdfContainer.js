@@ -12,8 +12,6 @@ import "react-pdf-reader/dist/TextLayerBuilder.css";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 
-
-
  export default class pdfContainer extends Component {
   state = {
     numPages: null,
@@ -52,10 +50,8 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
       });
     const divStyle = {
     display: 'inline-block',
-      color: 'orange',
-      backgroundColor: 'grey',
-      textAlign: 'center',
-     
+      color: 'red',
+      textAlign: 'center',  
     };
 
     return (
@@ -96,16 +92,18 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
           >
             Next
           </button>
+
           <form className="comment_form">
                 <label>
-                    Comment:
-                    <input type="text" name="pdf_comment"  />
-                    <input type="submit" value="Submit" />
+                    Comment:  
                 </label>
+                <div>
+                  <input type="text" name="pdf_comment"  />
+                <button type="submit" value="Submit">Save</button>
+                </div>
+                
           </form>
-          
-                    
-              
+        
           </div>
       </React.Fragment>
        </div>

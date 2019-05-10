@@ -77,3 +77,13 @@ form button:hover {
 .chatTitle{
   display: inline-block;
 }
+
+.comment_form{
+  position: relative;
+  padding-top: 3rem;
+}
+
+.comment_form button{
+  background-color: #1b8c00;
+  margin-top: 1rem;
+}

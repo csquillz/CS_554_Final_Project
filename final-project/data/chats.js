@@ -4,7 +4,7 @@ const chats = mongoCollections.chats;
 const uuid = require("uuid");
 
 let exportedMethods = {
-    async getFirstNMessages(skipNum, takeNum) {
+    async getFirstNChatrooms(skipNum, takeNum) {
         const chatsCollection = await chats();
         return await chatsCollection.find().skip(skipNum).limit(takeNum).toArray();
     },
@@ -32,7 +32,7 @@ let exportedMethods = {
                     return newInsertInformation.insertedId;
                 })
                 .then(newId => {
-                    return this.getUserById(newId);
+                    return this.getChatroomById(newId);
                 });
         });
     },
@@ -54,15 +54,15 @@ let exportedMethods = {
             throw "could not update chat successfully";
         }
 
-        return await this.getUserById(id);
+        return await this.getChatroomById(id);
     },
-    async removeMessage(userId, messageId) {
+    async removeMessage(chatroomId, messageId) {
         const chatCollection = await chats();
         const deletionInfo = await chatCollection.updateOne({_id: userId}, {$pull: {messages: {id:messageId}}});
         if (deletionInfo.modifiedCount === 0) {
             throw `Could not delete message with id of ${messageId}`;
         }
-        return await this.getUserById(userId);
+        return await this.getChatroomById(chatroomId);
     }
 };
 

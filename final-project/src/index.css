@@ -50,6 +50,16 @@ form button {
   border-radius: 0.25rem;
   text-transform: uppercase;
 }
+button {
+  width: 6rem;
+  background-color: #1b8c00;
+  color: white;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  text-transform: uppercase;
+}
 form button:hover {
   background-color: #166d01;
 }
@@ -86,4 +96,63 @@ form button:hover {
 .comment_form button{
   background-color: #1b8c00;
   margin-top: 1rem;
+}
+
+.commentPanel{
+  display: inline-block;
+  position: fixed;
+}
+
+.commentText{
+  height:300px;
+  width: 400px;
+}
+
+.pdfButton{
+  background-color:orange; 
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  width: 100px;
+  border-radius: 8px;
+  border: 1px solid black;
+  font-family: Times, TimesNR, 'New Century Schoolbook',Georgia, 'New York', serif;
+  font-style:oblique;
+  box-shadow: 0 9px #999;
+}
+.react_fragment{
+  background-color: darkgray
+}
+
+.pdfSubmitButton{
+  background-color:orange; 
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  width: 100px;
+  border-radius: 8px;
+  border: 1px solid black;
+  font-family: Times, TimesNR, 'New Century Schoolbook',Georgia, 'New York', serif;
+  font-style:oblique;
+  box-shadow: 0 9px #999;
+}
+.pdfPagetext{
+  font-family: Times, TimesNR, 'New Century Schoolbook',Georgia, 'New York', serif;
+  font-style:oblique;
+  color: green;
+  font-weight:bold;
+  font-size:24px;
+
 }

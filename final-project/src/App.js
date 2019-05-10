@@ -5,15 +5,12 @@ import './App.css';
 import Chat from "./components/chatRoom"
 import pdfContainer from './component/pdfContainer';
 
-
 class App extends Component {
   render() {
     return (
       <Switch>
-
         <Route exact path="/" component={Chat} />
         <Route exact path='/pdfViewer' component={pdfContainer} />
-
       </Switch>
     );
   }

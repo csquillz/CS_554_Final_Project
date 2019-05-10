@@ -1,5 +1,7 @@
-const taskData = require("./tasks");
+const userData = require("./users");
+const chatData = require("./chats");
 
 module.exports = {
-  tasks: taskData,
+  users: userData,
+  chats: chatData
 };

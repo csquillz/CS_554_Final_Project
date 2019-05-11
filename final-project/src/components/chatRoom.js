@@ -22,6 +22,7 @@ class Chat extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleRoomChange = this.handleRoomChange.bind(this);
         this.addRoom = this.addRoom.bind(this);
+        this.addMessage = this.addMessage.bind(this);
 
     }
 
@@ -51,6 +52,7 @@ class Chat extends React.Component {
             .then(data => data.data)
             .then(res => res);
 
+        console.log(roomInfo)
         await this.setState({ rooms: roomInfo })
         await this.setState({ roomName: roomInfo[0].chatroomName })
         
@@ -73,15 +75,15 @@ class Chat extends React.Component {
         // await this.setState({ messages: [...welcomeMessage.messages] })
     }
 
-    addMessage = (message) => {
-        // console.log(message)
-        // let allMessages = await axios.post("http://localhost:5000/api/chatrooms/messages", {
-        //     message: message,
-        //     chatroomName: this.state.roomName
-        // }).then(data => data.data)
+    addMessage(message){
+        this.setState({ messages: [...this.state.messages, message] })        
+    }
 
-        // console.log(message)
-        this.setState({ messages: [...this.state.messages, message] })
+    addtoRedis(message){
+        axios.post("http://localhost:5000/api/chatrooms/messages", {
+            message: message,
+            chatroomName: this.state.roomName
+        }).then(data => data.data)  
     }
 
     async addRoom(event) {
@@ -112,18 +114,26 @@ class Chat extends React.Component {
             currRoom: currRoom
         });
 
+        console.log("here")
         // this.addMessage(this.state.username + " just joined the chat!");
 
         // console.log(currRoom)
         // console.log(this.state.roomName)
-        let emptyArr = []
-        this.setState({ messages: emptyArr });
+        await this.setState({ messages: await axios.get("http://localhost:5000/api/chatrooms/messages/"+currRoom)
+            .then(data => data.data)
+            .then(res => res)
+        });
+        // console.log("ans also here")
+        // console.log(prevMessages)
+        // let emptyArr = []
+        // this.setState({ messages: emptyArr });
         // console.log(this.state.messages)
     }
 
     async handleSubmit(event) {
         event.preventDefault();
         this.addMessage(this.state.username + ": " + this.state.input);
+        this.addtoRedis(this.state.username + ": " + this.state.input)
         socket.emit("chat_message", {
             roomName: this.state.roomName,
             username: this.state.username,

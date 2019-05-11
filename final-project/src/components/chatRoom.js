@@ -6,7 +6,7 @@ class Chat extends React.Component {
 
     constructor(props) {
         super(props);
-        const username = prompt("Enter a username: ")
+        const username = "Nobody";
         this.state = {
             input: "",
             roomInput: "",
@@ -93,7 +93,7 @@ class Chat extends React.Component {
     render() {
         return (
             <div>
-                <div>
+                <div className="toolbar toolbar-header">
                     <h1 className="chatTitle">{this.state.roomName}</h1>
                     <form className="addChatRoom" onSubmit={this.addRoom}>
                         <input type="text" value={this.state.roomInput} name="roomInput" onChange={this.handleChange} />
@@ -106,13 +106,14 @@ class Chat extends React.Component {
                     ))}
                 </ul>
                 <form onSubmit={this.handleSubmit}>
-                    <select id="room-selector" onChange={this.handleRoomChange}>
+                    
+                    <select className="form-control" id="room-selector" onChange={this.handleRoomChange}>
                         {this.state.rooms.map((i) =>
                             <option name= "roomName" key={i} value={i}>{i}</option>
                         )}
                     </select>
                     <input type="text" value={this.state.input} name="input" onChange={this.handleChange} />
-                    <button type="submit" value="Submit">Submit</button>
+                    <button type="btn-primary pull-right submit" value="Submit">Submit</button>
                 </form>
             </div>
         )

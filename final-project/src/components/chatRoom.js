@@ -113,7 +113,7 @@ class Chat extends React.Component {
                         <form className="addChatRoom" onSubmit={this.addRoom}>
                             <input type="text" value={this.state.roomInput} style={{"float": "left"}} name="roomInput" onChange={this.handleChange} />
                             <div style={{"overflow": "hidden", "padding-left": ".3em"}}>
-                                <input type="submit" value="Submit" style={{"width": "100%"}} />
+                                <button type="btn btn-default submit" style={{"width": "100%"}}>Submit</button>
                             </div>
                         </form>
                     </div>
@@ -131,7 +131,7 @@ class Chat extends React.Component {
                         )}
                     </select>
                     <input type="text" value={this.state.input} name="input" onChange={this.handleChange} />
-                    <button type="btn-primary pull-right submit" value="Submit">Submit</button>
+                    <button type="btn btn-primary submit" value="Submit">Submit</button>
                 </form>
             </div>
         )

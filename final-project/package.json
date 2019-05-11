@@ -6,7 +6,11 @@
     "@react-pdf/renderer": "^1.5.4",
     "@react-pdf/styled-components": "github:react-pdf/styled-components",
     "axios": "^0.18.0",
+    "concurrently": "^4.1.0",
     "cors": "^2.8.5",
+    "electron": "^5.0.1",
+    "electron-builder": "^20.40.2",
+    "electron-is-dev": "^1.1.0",
     "flat": "^4.1.0",
     "install": "^0.12.2",
     "mongodb": "^3.2.4",
@@ -21,9 +25,12 @@
     "react-scripts": "2.1.8",
     "saiku-react-pdfjs": "^1.0.2",
     "socket.io": "^2.2.0",
-    "socket.io-client": "^2.2.0"
+    "socket.io-client": "^2.2.0",
+    "wait-on": "^3.2.0"
   },
+  "main": "public/electron.js",
   "scripts": {
+    "electron-dev": "concurrently \"BROWSER=none npm start\" \"wait-on http://localhost:3000 && electron .\"",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

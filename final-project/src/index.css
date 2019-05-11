@@ -61,13 +61,6 @@ code {
   border-color: #9ecaed;
   box-shadow: 0 0 10px #9ecaed;
 }
-/* .chatbox button {
-  width: 6rem;
-  padding: 0.5rem;
-  cursor: pointer;
-  border-radius: 0.25rem;
-  text-transform: uppercase;
-}  */
 
 .messages {
   margin: 0;

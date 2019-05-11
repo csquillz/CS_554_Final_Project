@@ -39,21 +39,47 @@ class Chat extends React.Component {
             addMessage(data + " has left the chat.");
         });
 
+
+
+        // socket.emit("join_room", {
+        //     username: this.state.username,
+        //     prevRoom: this.state.roomName,
+        //     currRoom: this.state.roomName
+        // });
+
+        let roomInfo = await axios.get("http://localhost:5000/api/chatrooms/")
+            .then(data => data.data)
+            .then(res => res);
+
+        await this.setState({ rooms: roomInfo })
+        await this.setState({ roomName: roomInfo[0].chatroomName })
+        
         socket.emit("user_join", {
             username: this.state.username,
             roomName: this.state.roomName
         });
+        // let oldMessages = await axios.get("http://localhost:5000/api/chatrooms/messages/"+this.state.roomName)
+        //     .then(data => data.data)
+        //     .then(res => res);
 
-        let roomInfo = await axios.get("http://localhost:5000/api/chatrooms/")
-        .then(data => data.data)
-        .then(res => res);
-         
-        await this.setState({rooms: roomInfo})
-        console.log(this.state.rooms)
-        await this.setState({roomName: roomInfo[0].chatroomName})
+        // await this.setState({ messages: [...this.state.messages, ...oldMessages] })
+
+        // let welcomeMessage = await axios.post("http://localhost:5000/api/chatrooms/messages", {
+        //     message: this.state.username + " just joined the chat!",
+        //     chatroomName: this.state.roomName
+        // }).then(data => data.data)
+
+        // console.log(welcomeMessage)
+        // await this.setState({ messages: [...welcomeMessage.messages] })
     }
 
     addMessage = (message) => {
+        // console.log(message)
+        // let allMessages = await axios.post("http://localhost:5000/api/chatrooms/messages", {
+        //     message: message,
+        //     chatroomName: this.state.roomName
+        // }).then(data => data.data)
+
         // console.log(message)
         this.setState({ messages: [...this.state.messages, message] })
     }
@@ -61,12 +87,12 @@ class Chat extends React.Component {
     async addRoom(event) {
         event.preventDefault();
         let newRoom = this.state.roomInput
-        
         this.setState({ roomInput: "" });
+
         await axios.post("http://localhost:5000/api/chatrooms/", {
             chatroomName: newRoom
         }).then(data => data.data)
-        .then(res => this.setState({ rooms: [...this.state.rooms, res] }));
+            .then(res => this.setState({ rooms: [...this.state.rooms, res] }));
         console.log(this.state.rooms)
     }
 
@@ -79,11 +105,14 @@ class Chat extends React.Component {
         let currRoom = event.target.value
         await this.setState({ roomName: currRoom });
 
+        console.log(await this.state.username)
         socket.emit("join_room", {
             username: this.state.username,
             prevRoom: prevRoom,
             currRoom: currRoom
         });
+
+        // this.addMessage(this.state.username + " just joined the chat!");
 
         // console.log(currRoom)
         // console.log(this.state.roomName)

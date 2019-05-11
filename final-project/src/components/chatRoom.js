@@ -136,11 +136,11 @@ class Chat extends React.Component {
             <div>
                 <header className="toolbar toolbar-header">
                     <div className="toolbar-actions">
-                        {/* <h1 className="chatTitle">{this.state.roomName}</h1> */}
-                        <h3 className="chatTitle" style={{"margin": "0.5rem"}}>Testing testing</h3>
+                        <h1 className="chatTitle" style={{"margin": "0.2rem"}}>{this.state.roomName==="" ? "-" : this.state.roomName}</h1>
+                        {/* <h3 className="chatTitle" style={{"margin": "0.5rem"}}>Testing testing</h3> */}
                         <form className="addChatRoom" onSubmit={this.addRoom}>
                             <input type="text" value={this.state.roomInput} style={{"float": "left"}} name="roomInput" onChange={this.handleChange} />
-                            <div style={{"overflow": "hidden", "padding-left": ".3em"}}>
+                            <div style={{"overflow": "hidden", "padding-left": ".2em", "padding-right": ".2em"}}>
                                 <button className="btn btn-default" type="submit" style={{"width": "100%"}}>Submit</button>
                             </div>
                         </form>
@@ -153,13 +153,16 @@ class Chat extends React.Component {
                 </ul>
                 <form className="chatbox" onSubmit={this.handleSubmit}>
                     
-                    <select className="form-control" id="room-selector" onChange={this.handleRoomChange}>
+                    <select className="form-control dropdown" id="room-selector" onChange={this.handleRoomChange}>
                         {this.state.rooms.map((i) =>
                             <option name="roomName" key={i.chatroomName} value={i.chatroomName}>{i.chatroomName}</option>
                         )}
                     </select>
-                    <input type="text" value={this.state.input} name="input" onChange={this.handleChange} />
-                    <button className="btn btn-positive" type="submit" value="Submit">Submit</button>
+                    <input className="form-control" type="text" value={this.state.input}  placeholder="Enter your message here." name="input" onChange={this.handleChange} />
+                    <button className="btn btn-default" type="submit" value="Submit">
+                        <span className="icon icon-rocket icon-text"></span>
+                        Submit
+                        </button>
                 </form>
             </div>
         )

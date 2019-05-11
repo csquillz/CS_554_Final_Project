@@ -43,19 +43,25 @@ code {
   width: 100%;
   display: flex;
   /* box-sizing: border-box; */
-  padding: 0.5rem;
+  padding: 0.8rem;
 }
 .chatbox input {
   /* border: 0; */
-  width: 100%;
-  border:2px solid #dadada;
-  border-radius:7px;
-  font-size:18px;
-  margin-left: 0.5rem;
+  width: 60%;
+  border:1px solid #dadada;
+  /* border-radius:7px; */
+  font-size:15px;
+  margin-left: 0.8rem;
   /* outline: 0; */
-  margin-right: 0.5rem;
-  /* border-radius: 0.25rem; */
+  margin-right: 0.8rem;
+  border-radius: 0.25rem;
 }
+
+.dropdown {
+  margin-left: 0.8rem;
+  width: 25%;
+}
+
 .chatbox input:focus {
   outline: none;
   border-color: #9ecaed;

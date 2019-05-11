@@ -41,6 +41,7 @@ class App extends Component {
           <Route exact path="/" component={Chat} />
           <Route exact path='/pdfViewer' component={pdfContainer} />
         </Switch>
+
       </div>
     );
   }

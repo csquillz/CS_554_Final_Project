@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import logo from './logo.svg';
 import './App.css';
 import Chat from "./components/chatRoom"
-import pdfContainer from './component/pdfContainer';
+import pdfContainer from './components/pdfContainer';
 
 class App extends Component {
   render() {

@@ -1,6 +1,8 @@
 import React from "react";
 import io from "socket.io-client";
+import axios from "axios";
 let socket = io("http://localhost:4000");
+
 
 class Chat extends React.Component {
 
@@ -12,8 +14,8 @@ class Chat extends React.Component {
             roomInput: "",
             username,
             messages: [`${username} has joined the chat!`],
-            roomName: "CS554",
-            rooms: ["CS443", "General"]
+            roomName: "",
+            rooms: []
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -23,7 +25,7 @@ class Chat extends React.Component {
 
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         //this.setState({ messages: ["You have joined the chat as '" + this.state.username + "'."] })
 
         const addMessage = this.addMessage
@@ -41,6 +43,14 @@ class Chat extends React.Component {
             username: this.state.username,
             roomName: this.state.roomName
         });
+
+        let roomInfo = await axios.get("http://localhost:5000/api/chatrooms/")
+        .then(data => data.data)
+        .then(res => res);
+         
+        await this.setState({rooms: roomInfo})
+        console.log(this.state.rooms)
+        await this.setState({roomName: roomInfo[0].chatroomName})
     }
 
     addMessage = (message) => {
@@ -51,10 +61,13 @@ class Chat extends React.Component {
     async addRoom(event) {
         event.preventDefault();
         let newRoom = this.state.roomInput
-        await this.setState({ rooms: [...this.state.rooms, newRoom] })
-        console.log(this.state.roomInput)
-        console.log(this.state.rooms)
+        
         this.setState({ roomInput: "" });
+        await axios.post("http://localhost:5000/api/chatrooms/", {
+            chatroomName: newRoom
+        }).then(data => data.data)
+        .then(res => this.setState({ rooms: [...this.state.rooms, res] }));
+        console.log(this.state.rooms)
     }
 
     async handleChange(event) {
@@ -108,7 +121,7 @@ class Chat extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                     <select id="room-selector" onChange={this.handleRoomChange}>
                         {this.state.rooms.map((i) =>
-                            <option name= "roomName" key={i} value={i}>{i}</option>
+                            <option name="roomName" key={i.chatroomName} value={i.chatroomName}>{i.chatroomName}</option>
                         )}
                     </select>
                     <input type="text" value={this.state.input} name="input" onChange={this.handleChange} />

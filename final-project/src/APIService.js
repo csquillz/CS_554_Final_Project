@@ -15,30 +15,6 @@ app.use(bodyParser.json());
 
 let recentUserData = [];
 
-
-
-//log all req bodies
-router.use(function (req, res, next) {
-    console.log("________________________________________________________")
-    console.log("A " + req.method + " request was made to " + req.protocol + "://" + req.get("host") + req.originalUrl + " containing: \n" + JSON.stringify(req.body));
-    console.log("________________________________________________________")
-    next();
-});
-
-//number of requests that have been made to the current path
-const paths = {};
-router.use(function (req, res, next) {
-    if (!paths[req.path]) {
-        paths[req.path] = 0
-    }
-    paths[req.path]++;
-
-    console.log("________________________________________________________")
-    console.log("You visited " + req.protocol + "://" + req.get("host") + req.originalUrl + " " + paths[req.path] + " number of times.");
-    console.log("________________________________________________________")
-    next();
-});
-
 router.get("/", async (req, res) => {
     let skipNum = parseInt(req.query.skip)
     let takeNum = parseInt(req.query.take)
@@ -293,5 +269,7 @@ router.delete("/:userId/:commentId", async (req, res) => {
         res.status(500).json({ error: e });
     }
 });
+
+router.get
 
 module.exports = router;

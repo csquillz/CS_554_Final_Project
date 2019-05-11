@@ -10,17 +10,25 @@ ReactDOM.render((
     <div className="window">
         <header className="toolbar toolbar-header">
             <div className="toolbar-actions">
-                <div className="btn-group">
+                {/* <div className="btn-group">
                     <button className="btn btn-default">
                         <span className="icon icon-home"></span>
                     </button>
                     <button className="btn btn-default">
                         <span className="icon icon-shuffle"></span>
                     </button>
-                </div>
+                </div> */}
                 <button className="btn btn-default">
                     <span className="icon icon-home icon-text"></span>
-                    Filters
+                    ..Home
+                </button>
+                <button className="btn btn-default">
+                    <span className="icon icon-newspaper"></span>
+                    ..Documents
+                </button>
+                <button className="btn btn-default">
+                    <span className="icon icon-chat"></span>
+                    ..Chatroom
                 </button>
             </div>
         </header>

@@ -106,19 +106,24 @@ class Chat extends React.Component {
     render() {
         return (
             <div>
-                <div className="toolbar toolbar-header">
-                    <h1 className="chatTitle">{this.state.roomName}</h1>
-                    <form className="addChatRoom" onSubmit={this.addRoom}>
-                        <input type="text" value={this.state.roomInput} name="roomInput" onChange={this.handleChange} />
-                        <button type="submit" value="Submit">Add Room!</button>
-                    </form>
-                </div>
+                <header className="toolbar toolbar-header">
+                    <div className="toolbar-actions">
+                        {/* <h1 className="chatTitle">{this.state.roomName}</h1> */}
+                        <h3 className="chatTitle" style={{"margin": "0.5rem"}}>Testing testing</h3>
+                        <form className="addChatRoom" onSubmit={this.addRoom}>
+                            <input type="text" value={this.state.roomInput} style={{"float": "left"}} name="roomInput" onChange={this.handleChange} />
+                            <div style={{"overflow": "hidden", "padding-left": ".3em"}}>
+                                <input type="submit" value="Submit" style={{"width": "100%"}} />
+                            </div>
+                        </form>
+                    </div>
+                </header>
                 <ul className="messages">
                     {this.state.messages.map(item => (
                         <li key={item}>{item}</li>
                     ))}
                 </ul>
-                <form onSubmit={this.handleSubmit}>
+                <form className="chatbox" onSubmit={this.handleSubmit}>
                     
                     <select className="form-control" id="room-selector" onChange={this.handleRoomChange}>
                         {this.state.rooms.map((i) =>

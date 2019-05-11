@@ -5,6 +5,9 @@
   "dependencies": {
     "@react-pdf/renderer": "^1.5.4",
     "@react-pdf/styled-components": "github:react-pdf/styled-components",
+    "axios": "^0.18.0",
+    "cors": "^2.8.5",
+    "flat": "^4.1.0",
     "install": "^0.12.2",
     "mongodb": "^3.2.4",
     "npm": "^6.9.0",

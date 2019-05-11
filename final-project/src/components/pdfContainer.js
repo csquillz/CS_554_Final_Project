@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import { Text, View, StyleSheet } from '@react-pdf/renderer';
-import './Pdf.css';
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf-reader/dist/TextLayerBuilder.css";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
@@ -160,9 +159,7 @@ export default class pdfContainer extends Component {
               <input className="form-control" name="file" ref={(ref) => { this.uploadInput = ref; }} type="file" onChange={this.handleUpload} />
             </form>
           </div>
-          <div class="container">
 
-          </div>
         </React.Fragment>
       </div>
     );

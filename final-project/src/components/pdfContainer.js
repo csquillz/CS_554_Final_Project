@@ -154,7 +154,7 @@ export default class pdfContainer extends Component {
               Files:
             </label>
             <nav className="nav-group">
-              <h5>recently Opened:</h5>
+              <h5>Recently Opened:</h5>
               
               {this.state.files.map(item => (
                   <span className="nav-group-item" key={item}>

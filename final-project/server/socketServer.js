@@ -7,16 +7,17 @@ const port = 4000
 io.on('connection', function(socket) {
     console.log("connected")
     socket.on('user_join', function(data) {
+      console.log(data)
       this.username = data.username;
       this.roomName = data.roomName
       console.log(data.username + " joined " + data.roomName)
-      socket.in(data.roomName).emit('user_join', data);
+      socket.to(data.roomName).emit('user_join', data);
     });
   
     socket.on('chat_message', function(data) {
       // data.username = this.username;
       socket.to(data.roomName).emit('chat_message', data);
-      console.log(data.username + " sent a message: " + data.message)
+      console.log(data.username + " sent a message: " + data.message + " to room:" +data.roomName)
     });
   
     socket.on('disconnect', function(data) {

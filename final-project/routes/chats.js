@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const data = require("../data");
-const userData = data.users;
 const chatData = data.chats;
 
 
@@ -33,39 +32,33 @@ router.post("/", async (req, res) => {
     }
 });
 
-// //posts a chatroom with an empty comment array
-// router.post("/:id", async (req, res) => {
-//     const chatInfo = req.body;
+router.post("/messages", async (req, res) => {
+    const chatInfo = req.body;
 
-//     if (!chatInfo.username) {
-//         res.status(400).json({ error: "You must provide a username" });
-//         return;
-//     }
-//     if (!chatInfo.chatroomName) {
-//         res.status(400).json({ error: "You must provide chatroomName" });
-//         return;
-//     }
-    
+    if (!chatInfo.chatroomName) {
+        res.status(400).json({ error: "You must provide chatroomName" });
+        return;
+    }
 
+    try {
+        const { message, chatroomName} = chatInfo
+        const newMessage = await chatData.addMessage(message, chatroomName)
+        res.json(newMessage);
+    } catch (e) {
+        res.status(500).json({ error: e });
+    }
+});
 
-//     if (typeof chatInfo.username !== "string") {
-//         res.status(400).json({ error: "Username not valid" });
-//         return;
-//     }
-//     if (typeof chatInfo.name !== "string") {
-//       res.status(400).json({ error: "Chatroom Name not valid" });
-//       return;
-//     } 
-    
+router.get("/messages/:id", async (req, res) => {
 
-//     try {
-//         const { username, chatroomName} = chatInfo
-//         const newChat = await chatData.addChatroom(username, chatroomName);
-//         res.json(newChat);
-//     } catch (e) {
-//         res.status(500).json({ error: e });
-//     }
-// });
+    try {
+        const allMessages = await chatData.getMessages(req.params.id)
+        res.json(allMessages);
+    } catch (e) {
+        res.status(500).json({ error: e });
+    }
+});
+
 
 
 // router.post("/:id/messages", async (req, res) => {

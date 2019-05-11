@@ -96,29 +96,80 @@ export default class pdfContainer extends Component {
 
     return (
 
-      <div className='react_fragment' style={divStyle}>
-        <React.Fragment style={divStyle}>
-          <p style={divStyle}>
+      // <div className='react_fragment' style={divStyle}>
+      //   <React.Fragment style={divStyle}>
+      //     <p style={divStyle}>
 
-            <Document
-              file={this.state.file}
-              onLoadSuccess={this.onDocumentLoadSuccess}
-              style={divStyle}
-            >
-              <Page size="A1" pageNumber={pageNumber} style={styles.page}   >
-                <View style={styles.section}>
-                </View>
-              </Page>
+      //       <Document
+      //         file={this.state.file}
+      //         onLoadSuccess={this.onDocumentLoadSuccess}
+      //         style={divStyle}
+      //       >
+      //         <Page size="A1" pageNumber={pageNumber} style={styles.page}   >
+      //           <View style={styles.section}>
+      //           </View>
+      //         </Page>
 
-            </Document>
+      //       </Document>
 
 
-          </p>
-          <div className="commentPanel">
-            <p className = 'pdfPagetext'>
-              Page {pageNumber || (numPages ? 1 : '--')} of {numPages || '--'}
-            </p>
-            <button
+      //     </p>
+      //     <div className="commentPanel">
+      //       <p className = 'pdfPagetext'>
+      //         Page {pageNumber || (numPages ? 1 : '--')} of {numPages || '--'}
+      //       </p>
+      //       <button
+      //         type="button"
+      //         className="btn btn-success" 
+      //         disabled={pageNumber <= 1}
+      //         onClick={this.previousPage}
+      //       >
+      //         Previous
+      //     </button>
+      //       <button
+      //         type="button"
+      //         disabled={pageNumber >= numPages}
+      //         onClick={this.nextPage}
+      //         className="btn btn-success" 
+      //       >
+      //         Next
+      //     </button>
+
+      //       <form className="comment_form" onSubmit={this.handleSubmit}>
+      //         <label className = 'pdfPagetext'>
+      //           Comment:
+      //           </label>
+      //         <div>
+      //           <textarea type="text" className="commentText" name="comment" value={this.state.comment} placeholder="Write comment.." onChange={this.handleChange}/>
+      //         </div>
+      //         <div>
+      //           <button type="submit" value="Submit" className="btn btn-success" >Save</button>
+      //         </div>
+
+      //       </form>
+      //       <label>
+      //         Files:
+      //       </label>
+      //       <ul>
+      //         {this.state.files.map(item => (
+      //           <li key={item}>{item}</li>
+      //         ))}
+      //       </ul>
+      //       <form className="comment_form" onSubmit={this.handleUpload}>
+      //         <input className="form-control" name="file" ref={(ref) => { this.uploadInput = ref; }} type="file" onChange={this.handleUpload} />
+      //       </form>
+      //     </div>
+
+      //   </React.Fragment>
+      // </div>
+      <div class="window-content">
+        <div class="pane-group">
+          <div class="pane pane-one-fourth sidebar">
+            <div className="commentPanel">
+             <p className = 'pdfPagetext'>
+               Page {pageNumber || (numPages ? 1 : '--')} of {numPages || '--'}
+             </p>
+             <button
               type="button"
               className="btn btn-success" 
               disabled={pageNumber <= 1}
@@ -159,8 +210,22 @@ export default class pdfContainer extends Component {
               <input className="form-control" name="file" ref={(ref) => { this.uploadInput = ref; }} type="file" onChange={this.handleUpload} />
             </form>
           </div>
+          </div>
 
-        </React.Fragment>
+          <div class="pane">
+              <Document
+              file={this.state.file}
+              onLoadSuccess={this.onDocumentLoadSuccess}
+              style={divStyle}
+            >
+              <Page size="A1" pageNumber={pageNumber} style={styles.page}   >
+                <View style={styles.section}>
+                </View>
+              </Page>
+
+            </Document>
+          </div>
+        </div>
       </div>
     );
   }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './App.css';
 import Chat from "./components/chatRoom"
-import pdfContainer from './component/pdfContainer';
+import pdfContainer from './components/pdfContainer';
 
 class App extends Component {
   render() {

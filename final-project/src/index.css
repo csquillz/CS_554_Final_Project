@@ -1,11 +1,30 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  "Roboto",
+  "Oxygen",
+  "Ubuntu",
+  "Cantarell",
+  "Fira Sans",
+  "Droid Sans",
+  "Helvetica Neue",
+  sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
 }
 
 code {
@@ -17,52 +36,38 @@ code {
   position: fixed;
 }
 
-
-body {
-  margin: 0;
-  font-family: sans-serif;
-}
-form {
+.chatbox {
   position: fixed;
   bottom: 0;
-  left: 0;
+  /* left: 0; */
   width: 100%;
   display: flex;
-  box-sizing: border-box;
-  padding: 0.25rem;
+  /* box-sizing: border-box; */
+  padding: 0.8rem;
 }
-form input {
-  border: 0;
-  padding: 0.5rem;
-  width: 100%;
-  outline: 0;
-  margin-right: 0.5rem;
+.chatbox input {
+  /* border: 0; */
+  width: 60%;
+  border:1px solid #dadada;
+  /* border-radius:7px; */
+  font-size:15px;
+  margin-left: 0.8rem;
+  /* outline: 0; */
+  margin-right: 0.8rem;
   border-radius: 0.25rem;
-  background: #ccc;
 }
-form button {
-  width: 6rem;
-  background-color: #1b8c00;
-  color: white;
-  border: none;
-  padding: 0.5rem;
-  cursor: pointer;
-  border-radius: 0.25rem;
-  text-transform: uppercase;
+
+.dropdown {
+  margin-left: 0.8rem;
+  width: 25%;
 }
-button {
-  width: 6rem;
-  background-color: #1b8c00;
-  color: white;
-  border: none;
-  padding: 0.5rem;
-  cursor: pointer;
-  border-radius: 0.25rem;
-  text-transform: uppercase;
+
+.chatbox input:focus {
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 10px #9ecaed;
 }
-form button:hover {
-  background-color: #166d01;
-}
+
 .messages {
   margin: 0;
   padding: 0;
@@ -77,11 +82,14 @@ form button:hover {
 
 .addChatRoom{
   display: inline-block;
-  position: initial;
-  vertical-align: top;
-  width: 10rem;
+  position: relative;
+  /* vertical-align: top; */
+  margin: auto;
+  top: 50%;
+  transform: translateY(50%);
+  /* width: 10rem; */
   float: right;
-  padding-right: 2rem;
+  padding: 0.2rem;
 }
 
 .chatTitle{
@@ -151,7 +159,7 @@ form button:hover {
 .pdfPagetext{
   font-family: Times, TimesNR, 'New Century Schoolbook',Georgia, 'New York', serif;
   font-style:oblique;
-  color: green;
+  /* color: green; */
   font-weight:bold;
   font-size:24px;
 

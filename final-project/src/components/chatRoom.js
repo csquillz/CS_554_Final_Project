@@ -3,12 +3,11 @@ import io from "socket.io-client";
 import axios from "axios";
 let socket = io("http://localhost:4000");
 
-
 class Chat extends React.Component {
 
     constructor(props) {
         super(props);
-        const username = prompt("Enter a username: ")
+        const username = "Nobody";
         this.state = {
             input: "",
             roomInput: "",
@@ -145,26 +144,35 @@ class Chat extends React.Component {
     render() {
         return (
             <div>
-                <div>
-                    <h1 className="chatTitle">{this.state.roomName}</h1>
-                    <form className="addChatRoom" onSubmit={this.addRoom}>
-                        <input type="text" value={this.state.roomInput} name="roomInput" onChange={this.handleChange} />
-                        <button type="submit" value="Submit">Add Room!</button>
-                    </form>
-                </div>
+                <header className="toolbar toolbar-header">
+                    <div className="toolbar-actions">
+                        <h1 className="chatTitle" style={{"margin": "0.2rem"}}>{this.state.roomName==="" ? "-" : this.state.roomName}</h1>
+                        {/* <h3 className="chatTitle" style={{"margin": "0.5rem"}}>Testing testing</h3> */}
+                        <form className="addChatRoom" onSubmit={this.addRoom}>
+                            <input type="text" value={this.state.roomInput} style={{"float": "left"}} name="roomInput" onChange={this.handleChange} />
+                            <div style={{"overflow": "hidden", "padding-left": ".2em", "padding-right": ".2em"}}>
+                                <button className="btn btn-default" type="submit" style={{"width": "100%"}}>Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </header>
                 <ul className="messages">
                     {this.state.messages.map(item => (
                         <li key={item}>{item}</li>
                     ))}
                 </ul>
-                <form onSubmit={this.handleSubmit}>
-                    <select id="room-selector" onChange={this.handleRoomChange}>
+                <form className="chatbox" onSubmit={this.handleSubmit}>
+                    
+                    <select className="form-control dropdown" id="room-selector" onChange={this.handleRoomChange}>
                         {this.state.rooms.map((i) =>
                             <option name="roomName" key={i.chatroomName} value={i.chatroomName}>{i.chatroomName}</option>
                         )}
                     </select>
-                    <input type="text" value={this.state.input} name="input" onChange={this.handleChange} />
-                    <button type="submit" value="Submit">Submit</button>
+                    <input className="form-control" type="text" value={this.state.input}  placeholder="Enter your message here." name="input" onChange={this.handleChange} />
+                    <button className="btn btn-default" type="submit" value="Submit">
+                        <span className="icon icon-rocket icon-text"></span>
+                        Submit
+                        </button>
                 </form>
             </div>
         )

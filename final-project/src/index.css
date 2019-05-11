@@ -153,9 +153,8 @@ code {
 .pdfPagetext{
   font-family: Times, TimesNR, 'New Century Schoolbook',Georgia, 'New York', serif;
   font-style:oblique;
-  color: green;
+  /* color: green; */
   font-weight:bold;
   font-size:24px;
 
 }
-

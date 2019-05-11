@@ -3,7 +3,6 @@ import io from "socket.io-client";
 import axios from "axios";
 let socket = io("http://localhost:4000");
 
-
 class Chat extends React.Component {
 
     constructor(props) {
@@ -113,7 +112,7 @@ class Chat extends React.Component {
                         <form className="addChatRoom" onSubmit={this.addRoom}>
                             <input type="text" value={this.state.roomInput} style={{"float": "left"}} name="roomInput" onChange={this.handleChange} />
                             <div style={{"overflow": "hidden", "padding-left": ".3em"}}>
-                                <button type="btn btn-default submit" style={{"width": "100%"}}>Submit</button>
+                                <button className="btn btn-default" type="submit" style={{"width": "100%"}}>Submit</button>
                             </div>
                         </form>
                     </div>
@@ -131,7 +130,7 @@ class Chat extends React.Component {
                         )}
                     </select>
                     <input type="text" value={this.state.input} name="input" onChange={this.handleChange} />
-                    <button type="btn btn-primary submit" value="Submit">Submit</button>
+                    <button className="btn btn-positive" type="submit" value="Submit">Submit</button>
                 </form>
             </div>
         )

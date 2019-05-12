@@ -1,20 +1,28 @@
 import React from "react";
 import io from "socket.io-client";
 import axios from "axios";
-let socket = io("http://localhost:4000");
+<<<<<<< HEAD
+import Header from './header';
+=======
+import { withFirebase } from '../components/Firebase';
+import firebase from 'firebase';
 
+>>>>>>> 9bb6b1fbaf8830fa1fde549347adf1937b741099
+let socket = io("http://localhost:4000");
 class Chat extends React.Component {
 
     constructor(props) {
         super(props);
-        const username = "Nobody";
+
+
         this.state = {
             input: "",
             roomInput: "",
-            username,
-            messages: [`${username} has joined the chat!`],
+            username: "",
+            messages: [`You have joined the chat!`],
             roomName: "",
-            rooms: []
+            rooms: [],
+            users: []
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -25,8 +33,26 @@ class Chat extends React.Component {
 
     }
 
+    onAuthChage(user) {
+        let username = ""
+        if (user.displayName) {
+            username = user.displayName
+        }
+        else {
+            username = user.email
+            username = username.substring(0, username.indexOf('@'));
+        }
+        this.setState({ username: username })
+
+        console.log(username)
+
+    }
+
     async componentDidMount() {
+
+
         //this.setState({ messages: ["You have joined the chat as '" + this.state.username + "'."] })
+        await firebase.auth().onAuthStateChanged(this.onAuthChage.bind(this));
 
         const addMessage = this.addMessage
         socket.on("chat_message", (data) => {
@@ -38,8 +64,6 @@ class Chat extends React.Component {
         socket.on("user_leave", function (data) {
             addMessage(data + " has left the chat.");
         });
-
-
 
         // socket.emit("join_room", {
         //     username: this.state.username,
@@ -54,11 +78,12 @@ class Chat extends React.Component {
         console.log(roomInfo)
         await this.setState({ rooms: roomInfo })
         await this.setState({ roomName: roomInfo[0].chatroomName })
-        
+
         socket.emit("user_join", {
             username: this.state.username,
             roomName: this.state.roomName
         });
+
         // let oldMessages = await axios.get("http://localhost:5000/api/chatrooms/messages/"+this.state.roomName)
         //     .then(data => data.data)
         //     .then(res => res);
@@ -143,15 +168,15 @@ class Chat extends React.Component {
 
     render() {
         return (
-            <div>
+            <Header propEx={this.props}>
                 <header className="toolbar toolbar-header">
                     <div className="toolbar-actions">
-                        <h1 className="chatTitle" style={{"margin": "0.2rem"}}>{this.state.roomName==="" ? "-" : this.state.roomName}</h1>
+                        <h1 className="chatTitle" style={{ "margin": "0.2rem" }}>{this.state.roomName === "" ? "-" : this.state.roomName}</h1>
                         {/* <h3 className="chatTitle" style={{"margin": "0.5rem"}}>Testing testing</h3> */}
                         <form className="addChatRoom" onSubmit={this.addRoom}>
-                            <input type="text" value={this.state.roomInput} style={{"float": "left"}} name="roomInput" onChange={this.handleChange} />
-                            <div style={{"overflow": "hidden", "padding-left": ".2em", "padding-right": ".2em"}}>
-                                <button className="btn btn-default" type="submit" style={{"width": "100%"}}>Submit</button>
+                            <input type="text" value={this.state.roomInput} style={{ "float": "left" }} name="roomInput" onChange={this.handleChange} />
+                            <div style={{ "overflow": "hidden", "padding-left": ".2em", "padding-right": ".2em" }}>
+                                <button className="btn btn-default" type="submit" style={{ "width": "100%" }}>Submit</button>
                             </div>
                         </form>
                     </div>
@@ -162,19 +187,19 @@ class Chat extends React.Component {
                     ))}
                 </ul>
                 <form className="chatbox" onSubmit={this.handleSubmit}>
-                    
+
                     <select className="form-control dropdown" id="room-selector" onChange={this.handleRoomChange}>
                         {this.state.rooms.map((i) =>
                             <option name="roomName" key={i.chatroomName} value={i.chatroomName}>{i.chatroomName}</option>
                         )}
                     </select>
-                    <input className="form-control" type="text" value={this.state.input}  placeholder="Enter your message here." name="input" onChange={this.handleChange} />
+                    <input className="form-control" type="text" value={this.state.input} placeholder="Enter your message here." name="input" onChange={this.handleChange} />
                     <button className="btn btn-default" type="submit" value="Submit">
                         <span className="icon icon-rocket icon-text"></span>
                         Submit
                         </button>
                 </form>
-            </div>
+            </Header>
         )
     }
 }

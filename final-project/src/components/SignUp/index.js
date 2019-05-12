@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { compose, setDisplayName } from 'recompose';
-
+import Header from '../header';
 import { withFirebase } from '../Firebase';
 import { Link, withRouter } from 'react-router-dom';
 import Chat from "../chatRoom"
@@ -112,7 +112,7 @@ class SignUpFormBase extends Component {
         </button>
 
         {error && <p>{error.message}</p>}
-      </form>
+        </form>
     );
   }
 }

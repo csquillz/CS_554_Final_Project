@@ -3,6 +3,7 @@ import { Document, Page, pdfjs } from "react-pdf";
 import { Text, View, StyleSheet } from '@react-pdf/renderer';
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf-reader/dist/TextLayerBuilder.css";
+import axios from "axios";
 import Header from './header';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 let colors = ["#fc605b", "#fdbc40", "#34c84a", "#57acf5"];
@@ -18,14 +19,14 @@ export default class pdfContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
+      username: "Carol",
       numPages: null,
       pageNumber: 1,
       fileName: "",
       file: "",
       uploadInput: "",
       comment: "",
-      comments:[],
+      comments: [],
       files: []
     }
     this.handleUpload = this.handleUpload.bind(this);
@@ -33,26 +34,40 @@ export default class pdfContainer extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  colorReoccur = () =>
-  {
-    if(colorsCounter > 3)
-    {
-      colorsCounter = -1;
-    }
-    console.log(++colorsCounter);
-    return colors[colorsCounter];
+  async componentDidMount() {
+    await axios.get("http://localhost:5000/api/pdfs/user/" + this.state.username)
+      .then(data => data.data)
+      .then(res => this.setState({ files: [...this.state.files, ...res[0].pdfs]}));
   }
 
-  handleSubmit(event) {
+  // async handleSubmit(event) {
+  // colorReoccur = () =>
+  // {
+  //   if(colorsCounter > 3)
+  //   {
+  //     colorsCounter = -1;
+  //   }
+  //   console.log(++colorsCounter);
+  //   return colors[colorsCounter];
+  // }
+
+  async handleSubmit(event) {
     event.preventDefault();
     //call to database and set comments list
     console.log(event.target)
+    await axios.post("http://localhost:5000/api/pdfs/comments/", {
+      pdfName: this.state.fileName,
+      username: this.state.username,
+      comment: this.state.comment,
+      pageNum: this.state.pageNumber
+    }).then(data => console.log(data.data))
+
   }
-  
+
   async handleChange(event) {
-    console.log(event.target.value)
+    // console.log(this.state.files)
     await this.setState({ comment: event.target.value });
-}
+  }
 
   onDocumentLoadSuccess = (document) => {
     const { numPages } = document;
@@ -73,20 +88,27 @@ export default class pdfContainer extends Component {
   async handleUpload(e) {
 
     let files = e.target.files
-    let file= ""
+    let file = ""
     let fileName = ""
     let reader = new FileReader()
     reader.readAsDataURL(files[0])
     reader.onload = (e) => {
       // console.log(e.target.result)
       file = e.target.result
-      this.setState({file: file})
+      this.setState({ file: file })
     }
     fileName = files[0].name
-    console.log(fileName)
-    await this.setState({files:[...this.state.files, fileName]  })
-    console.log(this.state.files)
+    await this.setState({fileName: fileName})
+    console.log(files)
+    // await this.setState({ files: [...this.state.files, fileName] })
+    // console.log(this.state.files)
 
+    await axios.post("http://localhost:5000/api/pdfs/addPDF", {
+      pdfName: fileName,
+      username: this.state.username,
+      pdf: files[0]
+    }).then(data => data.data)
+    .then(res => this.setState({ files: [...res[0].pdfs]}));
   }
 
   render() {
@@ -123,7 +145,7 @@ export default class pdfContainer extends Component {
              </h3>
              <button
               type="button"
-              className="btn btn-success" 
+              className="btn btn-success"
               disabled={pageNumber <= 1}
               onClick={this.previousPage}
             >
@@ -133,7 +155,7 @@ export default class pdfContainer extends Component {
               type="button"
               disabled={pageNumber >= numPages}
               onClick={this.nextPage}
-              className="btn btn-success" 
+              className="btn btn-success"
             >
               Next
           </button>
@@ -143,7 +165,7 @@ export default class pdfContainer extends Component {
                 Comment:
                 </h3>
               <div>
-                <textarea type="text" className="commentText" name="comment" value={this.state.comment} placeholder="Write comment.." onChange={this.handleChange}/>
+                <textarea type="text" className="commentText" name="comment" value={this.state.comment} placeholder="Write comment.." onChange={this.handleChange} />
               </div>
               <div>
                 <button type="submit" value="Submit" className="btn btn-positive">Save</button>
@@ -157,9 +179,9 @@ export default class pdfContainer extends Component {
               <h5>Recently Opened:</h5>
               
               {this.state.files.map(item => (
-                  <span className="nav-group-item" key={item}>
+                  <span className="nav-group-item" key={item.fileName}>
                     <span className="icon icon-record" style={{"color": colors[++colorsCounter]}}></span>
-                    {item}
+                    {item.fileName}
                   </span>
                   ))}  
           </nav>

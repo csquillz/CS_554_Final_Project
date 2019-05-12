@@ -5,12 +5,15 @@ import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf-reader/dist/TextLayerBuilder.css";
 import axios from "axios";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
-
+let colors = ["#fc605b", "#fdbc40", "#34c84a", "#57acf5"];
+let colorsCounter = -1;
 export default class pdfContainer extends Component {
   state = {
     numPages: null,
     pageNumber: 1,
   }
+
+  
 
   constructor(props) {
     super(props);
@@ -35,6 +38,17 @@ export default class pdfContainer extends Component {
       .then(data => data.data)
       .then(res => this.setState({ files: [...this.state.files, ...res[0].pdfs]}));
   }
+
+  // async handleSubmit(event) {
+  // colorReoccur = () =>
+  // {
+  //   if(colorsCounter > 3)
+  //   {
+  //     colorsCounter = -1;
+  //   }
+  //   console.log(++colorsCounter);
+  //   return colors[colorsCounter];
+  // }
 
   async handleSubmit(event) {
     event.preventDefault();
@@ -115,31 +129,21 @@ export default class pdfContainer extends Component {
       textAlign: 'center',
     };
 
+    if (colorsCounter > 3)
+      {
+      colorsCounter = -1;
+      }
+
     return (
 
-      <div className='react_fragment' style={divStyle}>
-        <React.Fragment style={divStyle}>
-          <p style={divStyle}>
-
-            <Document
-              file={this.state.file}
-              onLoadSuccess={this.onDocumentLoadSuccess}
-              style={divStyle}
-            >
-              <Page size="A1" pageNumber={pageNumber} style={styles.page}   >
-                <View style={styles.section}>
-                </View>
-              </Page>
-
-            </Document>
-
-
-          </p>
-          <div className="commentPanel">
-            <p className='pdfPagetext'>
-              Page {pageNumber || (numPages ? 1 : '--')} of {numPages || '--'}
-            </p>
-            <button
+     
+      <div className="window-content">
+        <div className="pane-group">
+          <div className="pane pane-one-fourth sidebar" style={{"padding": "1rem"}}>
+             <h3>
+               Page {pageNumber || (numPages ? 1 : '--')} of {numPages || '--'}
+             </h3>
+             <button
               type="button"
               className="btn btn-success"
               disabled={pageNumber <= 1}
@@ -157,32 +161,118 @@ export default class pdfContainer extends Component {
           </button>
 
             <form className="comment_form" onSubmit={this.handleSubmit}>
-              <label className='pdfPagetext'>
+              <h3>
                 Comment:
-                </label>
+                </h3>
               <div>
                 <textarea type="text" className="commentText" name="comment" value={this.state.comment} placeholder="Write comment.." onChange={this.handleChange} />
               </div>
               <div>
-                <button type="submit" value="Submit" className="btn btn-success" >Save</button>
+                <button type="submit" value="Submit" className="btn btn-positive">Save</button>
               </div>
 
             </form>
             <label>
               Files:
             </label>
-            <ul>
+            <nav className="nav-group">
+              <h5>Recently Opened:</h5>
+              
               {this.state.files.map(item => (
-                <li key={item.pdfName}>{item.pdfName}</li>
-              ))}
-            </ul>
+                  <span className="nav-group-item" key={item.fileName}>
+                    <span className="icon icon-record" style={{"color": colors[++colorsCounter]}}></span>
+                    {item.fileName}
+                  </span>
+                  ))}  
+          </nav>
             <form className="comment_form" onSubmit={this.handleUpload}>
               <input className="form-control" name="file" ref={(ref) => { this.uploadInput = ref; }} type="file" onChange={this.handleUpload} />
             </form>
           </div>
 
-        </React.Fragment>
+          <div className="pane">
+              <Document
+              file={this.state.file}
+              onLoadSuccess={this.onDocumentLoadSuccess}
+              style={divStyle}
+            >
+              <Page size="A1" pageNumber={pageNumber} style={styles.page}   >
+                <View style={styles.section}>
+                </View>
+              </Page>
+            </Document>
+          </div>
+        </div>
       </div>
     );
   }
 }
+
+
+
+ // <div className='react_fragment' style={divStyle}>
+ //   <React.Fragment style={divStyle}>
+ //     <p style={divStyle}>
+
+ //       <Document
+ //         file={this.state.file}
+ //         onLoadSuccess={this.onDocumentLoadSuccess}
+ //         style={divStyle}
+ //       >
+ //         <Page size="A1" pageNumber={pageNumber} style={styles.page}   >
+ //           <View style={styles.section}>
+ //           </View>
+ //         </Page>
+
+ //       </Document>
+
+
+ //     </p>
+ //     <div className="commentPanel">
+ //       <p className = 'pdfPagetext'>
+ //         Page {pageNumber || (numPages ? 1 : '--')} of {numPages || '--'}
+ //       </p>
+ //       <button
+ //         type="button"
+ //         className="btn btn-success" 
+ //         disabled={pageNumber <= 1}
+ //         onClick={this.previousPage}
+ //       >
+ //         Previous
+ //     </button>
+ //       <button
+ //         type="button"
+ //         disabled={pageNumber >= numPages}
+ //         onClick={this.nextPage}
+ //         className="btn btn-success" 
+ //       >
+ //         Next
+ //     </button>
+
+ //       <form className="comment_form" onSubmit={this.handleSubmit}>
+ //         <label className = 'pdfPagetext'>
+ //           Comment:
+ //           </label>
+ //         <div>
+ //           <textarea type="text" className="commentText" name="comment" value={this.state.comment} placeholder="Write comment.." onChange={this.handleChange}/>
+ //         </div>
+ //         <div>
+ //           <button type="submit" value="Submit" className="btn btn-success" >Save</button>
+ //         </div>
+
+ //       </form>
+ //       <label>
+ //         Files:
+ //       </label>
+ //       <ul>
+ //         {this.state.files.map(item => (
+ //           <li key={item}>{item}</li>
+ //         ))}
+ //       </ul>
+ //       <form className="comment_form" onSubmit={this.handleUpload}>
+ //         <input className="form-control" name="file" ref={(ref) => { this.uploadInput = ref; }} type="file" onChange={this.handleUpload} />
+ //       </form>
+ //     </div>
+
+ //   </React.Fragment>
+ // </div>

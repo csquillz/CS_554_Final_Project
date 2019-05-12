@@ -1,9 +1,8 @@
 const app = require('../node_modules/express')();
 const http = require('http').Server(app);
 const io = require('../node_modules/socket.io/lib')(http);
-
+io.set('origins', '*:*');
 const port = 4000
-
 io.on('connection', function(socket) {
     console.log("connected")
     socket.on('user_join', function(data) {

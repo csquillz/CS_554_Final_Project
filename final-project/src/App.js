@@ -6,43 +6,20 @@ import pdfContainer from './components/pdfContainer';
 
 class App extends Component {
 
+  constructor(props)
+  {
+    super(props);
+    this.state = {
+      "current": null
+    };
+  }
+
   render() {
     return (
-      <div className="window">
-        <header className="toolbar toolbar-header">
-            <div className="toolbar-actions">
-                <div className="btn-group">
-                    <button className="btn btn-default">
-                        <span className="icon icon-left-open"></span>
-                    </button>
-                    <button className="btn btn-default">
-                        <span className="icon icon-right-open"></span>
-                    </button>
-                    <button className="btn btn-default">
-                        <span className="icon icon-dot-3"></span>
-                    </button>
-                </div>
-                <button className="btn btn-default">
-                    <span className="icon icon-home icon-text"></span>
-                    Home
-                </button>
-                <button className="btn btn-default">
-                    <span className="icon icon-newspaper icon-text"></span>
-                    Documents
-                </button>
-                <button className="btn btn-default">
-                    <span className="icon icon-chat icon-text"></span>
-                    Chatroom
-                </button>
-            </div>
-        </header>
-
-        <Switch>
-          <Route exact path="/" component={Chat} />
-          <Route exact path='/pdfViewer' component={pdfContainer} />
-        </Switch>
-
-      </div>
+          <Switch>
+            <Route exact path="/" component={Chat} />
+            <Route exact path='/pdfViewer' component={pdfContainer} />
+          </Switch>
     );
   }
 }

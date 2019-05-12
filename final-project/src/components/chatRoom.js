@@ -150,7 +150,7 @@ class Chat extends React.Component {
                         {/* <h3 className="chatTitle" style={{"margin": "0.5rem"}}>Testing testing</h3> */}
                         <form className="addChatRoom" onSubmit={this.addRoom}>
                             <input type="text" value={this.state.roomInput} style={{"float": "left"}} name="roomInput" onChange={this.handleChange} />
-                            <div style={{"overflow": "hidden", "padding-left": ".2em", "padding-right": ".2em"}}>
+                            <div style={{"overflow": "hidden", "paddingLeft": ".2em", "paddingRight": ".2em"}}>
                                 <button className="btn btn-default" type="submit" style={{"width": "100%"}}>Submit</button>
                             </div>
                         </form>

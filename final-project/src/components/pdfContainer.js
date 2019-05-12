@@ -113,8 +113,6 @@ export default class pdfContainer extends Component {
       }
 
     return (
-
-     
       <div className="window-content">
         <div className="pane-group">
           <div className="pane pane-one-fourth sidebar" style={{"padding": "1rem"}}>

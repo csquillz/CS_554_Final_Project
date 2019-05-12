@@ -1,8 +1,8 @@
 import React from "react";
 import io from "socket.io-client";
 import axios from "axios";
+import Header from './header';
 let socket = io("http://localhost:4000");
-
 class Chat extends React.Component {
 
     constructor(props) {
@@ -143,7 +143,7 @@ class Chat extends React.Component {
 
     render() {
         return (
-            <div>
+            <Header propEx={this.props}>
                 <header className="toolbar toolbar-header">
                     <div className="toolbar-actions">
                         <h1 className="chatTitle" style={{"margin": "0.2rem"}}>{this.state.roomName==="" ? "-" : this.state.roomName}</h1>
@@ -174,7 +174,7 @@ class Chat extends React.Component {
                         Submit
                         </button>
                 </form>
-            </div>
+            </Header>
         )
     }
 }

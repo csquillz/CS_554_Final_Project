@@ -5,12 +5,9 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
-import Header from './components/header';
 ReactDOM.render((        
         <BrowserRouter>    
-            <Header>
-                <App />
-            </Header>
+            <App />
         </BrowserRouter>
 ), document.getElementById('root'));
 registerServiceWorker();

@@ -43,9 +43,6 @@ class App extends Component {
           }
 
         return (
-<<<<<<< HEAD
-            
-=======
             <div className="window">
                 <header className="toolbar toolbar-header">
                     <div className="toolbar-actions">
@@ -75,7 +72,6 @@ class App extends Component {
                     </div>
                 </header>
 
->>>>>>> 47423c79ae7fd40f3130700bbfcd56b4e255870a
                 <Switch>
                     <Route exact path={ROUTES.LANDING} component={Landing} />
                     <Route exact path="/signin" component={SignInPage} />
@@ -87,6 +83,7 @@ class App extends Component {
 
                 </Switch>
                 <Navigation />
+            </div>
 
         );
     }

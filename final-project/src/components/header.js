@@ -1,5 +1,4 @@
 import React from 'react';
-import SignOutButton from './SignOut';
 
 const switcher = (props, x) =>
 {
@@ -39,11 +38,7 @@ const header = (props) => (
                             <span className="icon icon-newspaper icon-text"></span>
                             Documents
                         </button>
-<<<<<<< HEAD
                         <button className="btn btn-default" onClick={() => {switcher(props, "signin")}}>
-=======
-                        <button className="btn btn-default"  onClick={() => {props.propEx.history.push("/chat")}}>
->>>>>>> 47423c79ae7fd40f3130700bbfcd56b4e255870a
                             <span className="icon icon-chat icon-text"></span>
                             Sign In
                         </button>
@@ -51,18 +46,8 @@ const header = (props) => (
                                     <span className="icon icon-chat icon-text"></span>
                                     Sign Out
                         </button>
-<<<<<<< HEAD
                             </div>
                         </header>
-=======
-                        <button className="btn btn-default"  onClick={() => {props.propEx.history.push("/account")}}>
-                            <span className="icon icon-chat icon-text"></span>
-                            My Account
-                        </button>
-                        <SignOutButton/>
-                    </div>
-                </header>
->>>>>>> 47423c79ae7fd40f3130700bbfcd56b4e255870a
             {props.children}
     </div>
 )

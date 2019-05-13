@@ -25,6 +25,7 @@
     "react-pdf-reader": "^0.1.8",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
+    "react-with-firebase-auth": "^1.0.3",
     "recompose": "^0.30.0",
     "redis": "^2.8.0",
     "saiku-react-pdfjs": "^1.0.2",

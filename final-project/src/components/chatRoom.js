@@ -1,9 +1,16 @@
 import React from "react";
 import io from "socket.io-client";
 import axios from "axios";
+<<<<<<< HEAD
 import Header from './header';
 import { withFirebase } from '../components/Firebase';
 import firebase from 'firebase';
+=======
+import { withFirebase } from '../components/Firebase';
+import firebase from 'firebase';
+import Header from './header';
+
+>>>>>>> 47423c79ae7fd40f3130700bbfcd56b4e255870a
 let socket = io("http://localhost:4000");
 class Chat extends React.Component {
 
@@ -40,7 +47,7 @@ class Chat extends React.Component {
         }
         this.setState({ username: username })
 
-        console.log(username)
+        console.log(user)
 
     }
 

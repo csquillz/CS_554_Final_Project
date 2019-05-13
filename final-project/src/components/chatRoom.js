@@ -1,7 +1,7 @@
 import React from "react";
 import io from "socket.io-client";
 import axios from "axios";
-import { withFirebase } from '../components/Firebase';
+import { withAuthorization } from '../components/Session/';
 import firebase from 'firebase';
 import Header from './header';
 
@@ -201,4 +201,6 @@ class Chat extends React.Component {
     }
 }
 
-export default Chat;
+const condition = authUser => !!authUser;
+
+export default withAuthorization(condition)(Chat);

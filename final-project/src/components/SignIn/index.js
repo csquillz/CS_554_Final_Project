@@ -34,7 +34,6 @@ class SignInFormBase extends Component {
 
   onSubmit = event => {
     const { email, password } = this.state;
-
     this.props.firebase
       .doSignInWithEmailAndPassword(email, password)
       .then(() => {
@@ -59,7 +58,7 @@ class SignInFormBase extends Component {
     firebase.auth().signInWithRedirect(provider);
   
     firebase.auth().getRedirectResult().then(() => {
-      this.props.history.push(ROUTES.CHAT);
+      this.props.history.push(ROUTES.HOME);
     })
     .catch(error => {
       this.setState({ error });
@@ -78,6 +77,7 @@ class SignInFormBase extends Component {
     const isInvalid = password === '' || email === '';
 
     return (
+      <div class = "root">
       <form onSubmit={this.onSubmit}>
         <input
           name="email"
@@ -101,6 +101,7 @@ class SignInFormBase extends Component {
         </button>
         {error && <p>{error.message}</p>}
       </form>
+      </div>
     );
   }
 }

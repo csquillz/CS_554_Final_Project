@@ -8,8 +8,8 @@ import * as ROUTES from "../../const/routes"
 
 
 const SignUpPage = () => (
-  <div>
-    <h1>SignUp</h1>
+  <div style={{"margin": "2rem"}}>
+    <h1>Sign Up</h1>
     <SignUpForm />
   </div>
 );
@@ -78,39 +78,57 @@ class SignUpFormBase extends Component {
       username === '';
 
     return (
-      <form onSubmit={this.onSubmit}>
+      <form onSubmit={this.onSubmit} style={{"margin": "1rem"}}>
+        <div className="form-group">
+        <label>Full Name</label>
         <input
           name="username"
           value={username}
           onChange={this.onChange}
           type="text"
+          className="form-control"
           placeholder="Full Name"
-        />
+          />
+        </div>
+        <div className="form-group">
+        <label>Email Address</label>
         <input
           name="email"
           value={email}
           onChange={this.onChange}
-          type="text"
+            type="text"
+            className="form-control"
           placeholder="Email Address"
         />
+        </div>
+        <div className="form-group">
+        <label>Password</label>
         <input
           name="passwordOne"
           value={passwordOne}
           onChange={this.onChange}
-          type="password"
+            type="password"
+            className="form-control"
           placeholder="Password"
-        />
+          />
+        </div>
+        <div className="form-group">
+        <label>Confirm Password</label>
         <input
           name="passwordTwo"
           value={passwordTwo}
           onChange={this.onChange}
-          type="password"
+            type="password"
+            className="form-control"
           placeholder="Confirm Password"
-        />
-        <button disabled={isInvalid} type="submit">
+          />
+          </div>
+        <button style={{"marginTop" : "0.8rem"}} className="btn btn-large btn-positive" disabled={isInvalid} type="submit">
           Sign Up
         </button>
-
+        <button style={{"marginTop" : "0.8rem", "marginLeft" : "0.8rem"}} className="btn btn-large btn-negative" onClick={() => {this.props.history.push("/")}} >
+          Go Back
+        </button>
         {error && <p>{error.message}</p>}
         </form>
     );
@@ -118,8 +136,8 @@ class SignUpFormBase extends Component {
 }
 
 const SignUpLink = () => (
-  <p>
-    Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
+  <p style={{"margin": "1rem", "marginTop": "2rem"}}>
+    Don't have an account? <Link to={ROUTES.SIGN_UP} style={{"color": "blue", "textDecoration": "none", "cursor": "pointer"}}>Sign Up</Link>
   </p>
 );
 

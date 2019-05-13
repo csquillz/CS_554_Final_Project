@@ -4,7 +4,7 @@ import axios from "axios";
 import firebase from 'firebase';
 import { withFirebase } from '../components/Firebase';
 import {withAuthorization} from '../components/Session';
-
+let name = null;
 let socket = io("http://localhost:4000");
 class Chat extends React.Component {
 
@@ -27,7 +27,7 @@ class Chat extends React.Component {
         this.handleRoomChange = this.handleRoomChange.bind(this);
         this.addRoom = this.addRoom.bind(this);
         this.addMessage = this.addMessage.bind(this);
-
+        firebase.auth().onAuthStateChanged(this.onAuthChage.bind(this));
     }
 
     onAuthChage(user) {
@@ -40,7 +40,7 @@ class Chat extends React.Component {
             username = username.substring(0, username.indexOf('@'));
         }
         this.setState({ username: username })
-
+        name = username;
         console.log(user)
 
     }
@@ -168,7 +168,7 @@ class Chat extends React.Component {
             <div>
                 <header className="toolbar toolbar-header">
                     <div className="toolbar-actions">
-                        <h1 className="chatTitle" style={{ "margin": "0.2rem" }}>{this.state.roomName === "" ? "-" : this.state.roomName}</h1>
+                        <h1 className="chatTitle" style={{ "margin": "0.2rem" }}>{this.state.roomName === "" ? ( name === null ? "-" : name) : this.state.roomName}</h1>
                         {/* <h3 className="chatTitle" style={{"margin": "0.5rem"}}>Testing testing</h3> */}
                         <form className="addChatRoom" onSubmit={this.addRoom}>
                             <input type="text" value={this.state.roomInput} style={{ "float": "left" }} name="roomInput" onChange={this.handleChange} />

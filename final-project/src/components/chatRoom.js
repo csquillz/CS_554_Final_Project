@@ -1,9 +1,9 @@
 import React from "react";
 import io from "socket.io-client";
 import axios from "axios";
-import Header from './header';
 import firebase from 'firebase';
 import { withFirebase } from '../components/Firebase';
+import {withAuthorization} from '../components/Session';
 
 let socket = io("http://localhost:4000");
 class Chat extends React.Component {
@@ -165,7 +165,7 @@ class Chat extends React.Component {
 
     render() {
         return (
-            <Header propEx={this.props}>
+            <div>
                 <header className="toolbar toolbar-header">
                     <div className="toolbar-actions">
                         <h1 className="chatTitle" style={{ "margin": "0.2rem" }}>{this.state.roomName === "" ? "-" : this.state.roomName}</h1>
@@ -196,9 +196,11 @@ class Chat extends React.Component {
                         Submit
                         </button>
                 </form>
-            </Header>
+                </div>
         )
     }
 }
 
-export default Chat;
+const condition = authUser => !!authUser;
+
+export default withAuthorization(condition)(Chat);

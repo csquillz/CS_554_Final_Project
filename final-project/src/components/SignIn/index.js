@@ -58,6 +58,7 @@ class SignInFormBase extends Component {
     firebase.auth().signInWithRedirect(provider);
   
     firebase.auth().getRedirectResult().then(() => {
+      this.setState({ ...INITIAL_STATE });
       this.props.history.push(ROUTES.CHAT);
     })
     .catch(error => {

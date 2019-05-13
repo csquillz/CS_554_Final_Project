@@ -137,7 +137,7 @@ class SignUpFormBase extends Component {
 
 const SignUpLink = () => (
   <p style={{"margin": "1rem", "marginTop": "2rem"}}>
-    Don 't have an account? <Link to={ROUTES.SIGN_UP} style={{"color": "#1073f3", "textDecoration": "none", "cursor": "pointer"}}>Sign Up</Link>
+    Don't have an account? <Link to={ROUTES.SIGN_UP} style={{"color": "#1073f3", "textDecoration": "none", "cursor": "pointer"}}>Sign Up</Link>
   </p>
 );
 

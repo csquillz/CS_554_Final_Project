@@ -18,6 +18,8 @@ class PasswordChangeForm extends Component {
   onSubmit = event => {
     const { passwordOne } = this.state;
 
+    alert("Your password has been updated succesfully!")
+
     this.props.firebase
       .doPasswordUpdate(passwordOne)
       .then(() => {

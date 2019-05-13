@@ -28,7 +28,7 @@ const switcher = (props, x) =>
 
 const header = (props) => (
     <div className="window">
-                <header className="toolbar toolbar-header">
+                <header className="toolbar toolbar-header" style={{"pointerEvents": "auto"}}>
                     <div className="toolbar-actions">
                         <button className="btn btn-default"  onClick={() => {switcher(props, "chat")}}>
                             <span className="icon icon-chat icon-text"></span>

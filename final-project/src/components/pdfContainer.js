@@ -40,16 +40,15 @@ export default class pdfContainer extends Component {
       .then(res => this.setState({ files: [...this.state.files, ...res[0].pdfs]}));
   }
 
-  // async handleSubmit(event) {
-  // colorReoccur = () =>
-  // {
-  //   if(colorsCounter > 3)
-  //   {
-  //     colorsCounter = -1;
-  //   }
-  //   console.log(++colorsCounter);
-  //   return colors[colorsCounter];
-  // }
+  colorReoccur = () =>
+  {
+    if(colorsCounter > 3)
+    {
+      colorsCounter = -1;
+    }
+    console.log(++colorsCounter);
+    return colors[colorsCounter];
+  }
 
   async handleSubmit(event) {
     event.preventDefault();
@@ -138,14 +137,15 @@ export default class pdfContainer extends Component {
     return (
       <Header propEx={this.props}>
       <div classes="window-content">
-        <div className="pane-group" style={{"margin": "2.5rem"}}>
-          <div className="pane pane-one-fourth sidebar" style={{"padding": "1rem", "margin": "2.5rem"}}>
+        <div className="pane-group" style={{"marginTop": "2.2rem", "background": "#f5f5f4"}}>
+          <div className="pane pane-one-fourth sidebar" style={{"padding": "1rem", "marginTop": "2.5rem"}}>
              <h3>
                Page {pageNumber || (numPages ? 1 : '--')} of {numPages || '--'}
              </h3>
              <button
-              type="button"
-              className="btn btn-success"
+                type="button"
+                style={{"marginRight": "1rem"}}
+              className="btn btn-negative"
               disabled={pageNumber <= 1}
               onClick={this.previousPage}
             >
@@ -155,23 +155,21 @@ export default class pdfContainer extends Component {
               type="button"
               disabled={pageNumber >= numPages}
               onClick={this.nextPage}
-              className="btn btn-success"
+              className="btn btn-negative"
             >
               Next
           </button>
-
+            <div class="form-group">
             <form className="comment_form" onSubmit={this.handleSubmit}>
-              <h3>
-                Comment:
-                </h3>
-              <div>
-                <textarea type="text" className="commentText" name="comment" value={this.state.comment} placeholder="Write comment.." onChange={this.handleChange} />
-              </div>
+             <div class="form-group">
+              <h5>Notes/Comments</h5>
+                <textarea type="text" rows="4" className="form-control" name="comment" value={this.state.comment} placeholder="Write comment.." onChange={this.handleChange} />
+                    </div>
               <div>
                 <button type="submit" value="Submit" className="btn btn-positive">Save</button>
               </div>
-
-            </form>
+                </form>
+                </div>
             <label>
               Files:
             </label>
@@ -180,17 +178,17 @@ export default class pdfContainer extends Component {
               
               {this.state.files.map(item => (
                   <span className="nav-group-item" key={item.fileName}>
-                    <span className="icon icon-record" style={{"color": colors[++colorsCounter]}}></span>
+                    <span className="icon icon-record"></span>
                     {item.fileName}
                   </span>
                   ))}  
           </nav>
             <form className="comment_form" onSubmit={this.handleUpload}>
-              <input className="form-control" name="file" ref={(ref) => { this.uploadInput = ref; }} type="file" onChange={this.handleUpload} />
+              <input className="form-control" name="file" ref={(ref) => { this.uploadInput = ref; }} type="file" accept="application/pdf" onChange={this.handleUpload} />
             </form>
           </div>
 
-          <div className="pane"  style={{"padding": "1rem", "margin": "2.5rem"}}>
+          <div className="pane"  style={{"padding": "1rem", "marginTop": "2.5rem"}}>
               <Document
               file={this.state.file}
               onLoadSuccess={this.onDocumentLoadSuccess}

@@ -34,12 +34,12 @@ const NavigationAuth = () => (
 );
 
 const NavigationNonAuth = () => (
-  <ul>
+  <ul style={{"margin": "1rem", "marginTop": "2rem"}}>
     <li>
-      <Link to={ROUTES.LANDING}>Landing</Link>
+      <Link to={ROUTES.LANDING} style={{"color": "#1073f3", "textDecoration": "none", "cursor": "pointer", "fontSize": "18px"}}>Landing</Link>
     </li>
     <li>
-      <Link to={ROUTES.SIGN_IN}>Sign In</Link>
+      <Link to={ROUTES.SIGN_IN} style={{"color": "#f24a2a", "textDecoration": "none", "cursor": "pointer", "fontSize": "18px"}}>Sign In</Link>
     </li>
   </ul>
 );

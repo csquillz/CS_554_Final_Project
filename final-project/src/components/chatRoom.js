@@ -173,16 +173,18 @@ class Chat extends React.Component {
                         <form className="addChatRoom" onSubmit={this.addRoom}>
                             <input type="text" value={this.state.roomInput} style={{ "float": "left" }} name="roomInput" onChange={this.handleChange} />
                             <div style={{ "overflow": "hidden", "padding-left": ".2em", "padding-right": ".2em" }}>
-                                <button className="btn btn-default" type="submit" style={{ "width": "100%" }}>Submit</button>
+                                <button className="btn btn-default" type="submit" style={{ "width": "100%" }}>Add a Room!</button>
                             </div>
                         </form>
                     </div>
                 </header>
+                <div className="messagesList">
                 <ul className="messages">
                     {this.state.messages.map(item => (
                         <li key={item}>{item}</li>
                     ))}
                 </ul>
+                
                 <form className="chatbox" onSubmit={this.handleSubmit}>
 
                     <select className="form-control dropdown" id="room-selector" onChange={this.handleRoomChange}>
@@ -196,6 +198,7 @@ class Chat extends React.Component {
                         Submit
                         </button>
                 </form>
+                </div>
             </Header>
         )
     }

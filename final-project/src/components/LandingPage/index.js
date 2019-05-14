@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Landing = () => (
-  <div>
+  <div style={{"margin": "2rem"}}>
     <h1>Landing</h1>
   </div>
 );

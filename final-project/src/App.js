@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
-import { Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router,Route, Switch } from "react-router-dom";
 import './App.css';
 import Chat from "./components/chatRoom"
 import pdfContainer from './components/pdfContainer';
 import SignInPage from './components/SignIn';
 import SignUpPage from './components/SignUp';
 import Landing from './components/LandingPage';
-
+import Navigation from './components/Navigation';
 import AccountPage from './components/Account';
-import Navigation from './components/Navigation'; 
+import HomePage from './components/Home'; 
 import PrivateRoute from './components/Session/PrivateRoute';
 import firebase from 'firebase';
 import withAuthentication from './components/Session/withAuthentication';
 import * as ROUTES from "./const/routes";
+import { PasswordForgetForm } from './components/PasswordForget';
 
 class App extends Component {
     state = { loading: true, authenticated: false, user: null };
@@ -43,7 +44,7 @@ class App extends Component {
           }
 
         return (
-            <div className="window">
+           /*  <div className="window">
                 <header className="toolbar toolbar-header">
                     <div className="toolbar-actions">
                         <div className="btn-group">
@@ -71,20 +72,22 @@ class App extends Component {
                 </button>
                     </div>
                 </header>
-
-                <Switch>
+                </div> */
+                <Router>
+                    <div>
+                    <Navigation/>
                     <Route exact path={ROUTES.LANDING} component={Landing} />
-                    <Route exact path="/signin" component={SignInPage} />
-                    <PrivateRoute exact path="/chat" component={Chat} authenticated={this.state.authenticated}/>
-                    <PrivateRoute exact path="/pdfViewer" component={pdfContainer} authenticated={this.state.authenticated}/>
-                    <Route exact path='/signup' component={SignUpPage} />
-                    <Route exact path='/account' component={AccountPage} />
+                    <Route exact path={ROUTES.SIGN_IN} component={SignInPage} />
+                    <PrivateRoute exact path={ROUTES.CHAT} component={Chat} authenticated={this.state.authenticated}/>
+                    <PrivateRoute exact path={ROUTES.PDF} component={pdfContainer} authenticated={this.state.authenticated}/>
+                    <PrivateRoute exact path={ROUTES.HOME} component={HomePage} authenticated={this.state.authenticated}/>
+                    <Route exact path={ROUTES.SIGN_UP} component={SignUpPage} />
+                    <Route exact path={ROUTES.ACCOUNT} component={AccountPage} />
+                    <Route exact path={ROUTES.PASSWORD_FORGET} component={PasswordForgetForm} />
 
-
-                </Switch>
-                <Navigation />
-
-            </div>
+                    </div>
+                </Router>
+            
         );
     }
 }

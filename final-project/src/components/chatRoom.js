@@ -1,10 +1,10 @@
 import React from "react";
 import io from "socket.io-client";
 import axios from "axios";
-import { withFirebase } from '../components/Firebase';
 import firebase from 'firebase';
-import Header from './header';
-
+import { withFirebase } from '../components/Firebase';
+import {withAuthorization} from '../components/Session';
+let name = null;
 let socket = io("http://localhost:4000");
 class Chat extends React.Component {
 
@@ -27,7 +27,7 @@ class Chat extends React.Component {
         this.handleRoomChange = this.handleRoomChange.bind(this);
         this.addRoom = this.addRoom.bind(this);
         this.addMessage = this.addMessage.bind(this);
-
+        firebase.auth().onAuthStateChanged(this.onAuthChage.bind(this));
     }
 
     onAuthChage(user) {
@@ -40,7 +40,7 @@ class Chat extends React.Component {
             username = username.substring(0, username.indexOf('@'));
         }
         this.setState({ username: username })
-
+        name = username;
         console.log(user)
 
     }
@@ -165,7 +165,7 @@ class Chat extends React.Component {
 
     render() {
         return (
-            <Header propEx={this.props}>
+            <div>
                 <header className="toolbar toolbar-header">
                     <div className="toolbar-actions">
                         <h1 className="chatTitle" style={{ "margin": "0.2rem" }}>{this.state.roomName === "" ? "-" : this.state.roomName}</h1>
@@ -199,9 +199,10 @@ class Chat extends React.Component {
                         </button>
                 </form>
                 </div>
-            </Header>
         )
     }
 }
 
-export default Chat;
+const condition = authUser => !!authUser;
+
+export default withAuthorization(condition)(Chat);

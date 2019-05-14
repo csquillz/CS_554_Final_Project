@@ -136,6 +136,8 @@ export default class pdfContainer extends Component {
       await this.setState({ fileName: fileName })
 
       if (this.state.files.find(function (elem) { return elem.pdfName == fileName })) {
+        await this.setState({ comments: []})
+        await this.setState({ comment: "" })
         await axios.get("http://localhost:5000/api/pdfs/comments/" + this.state.username + "/" + fileName)
           .then(data => data.data)
           .then(res => this.setState({ comments: [...res] }));
@@ -146,8 +148,8 @@ export default class pdfContainer extends Component {
           }
         }
       } else {
-        this.setState({ comments: []})
-        this.setState({ comment: "" })
+        await this.setState({ comments: []})
+        await this.setState({ comment: "" })
         await axios.post("http://localhost:5000/api/pdfs/addPDF", {
           pdfName: fileName,
           username: this.state.username

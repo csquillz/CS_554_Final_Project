@@ -1,9 +1,8 @@
 import React from 'react';
 
 const WelcomePage = () => (
-  <div style={{ "margin": "2rem" }}>
+  <div className="welcome-page">
     <h1>Welcome :</h1>
-    <p>
       
 
 Welcome to our Project!
@@ -13,12 +12,14 @@ You can join a specific chat room to interact with other students or you can upl
   If you do not have a Google account or haven't registered, please Sign Up!
 </p>
 This project was created by:
-Caroline Squillante
-Ravi Rathore
-Rohan Khemani
-Bin Gui
-Anushka Varade</p>
-  </div>
+<ul>
+<li>Caroline Squillante</li>
+<li>Ravi Rathore</li>
+<li>Rohan Khemani</li>
+<li>Bin Gui</li>
+<li>Anushka Varade</li>
+</ul>
+</div>
 );
 
 export default WelcomePage;

@@ -178,8 +178,8 @@ export default class pdfContainer extends Component {
 
     return (
       <div>
-        <div className="pane-group" style={{ "margin": "2.5rem" }}>
-          <div className="pane pane-one-fourth sidebar" style={{ "padding": "1rem", "margin": "2.5rem", "width": "auto" }}>
+        <div className="pane-group">
+          <div className="pane pane-one-fourth sidebar">
             <h3>
               Page {pageNumber || (numPages ? 1 : '--')} of {numPages || '--'}
             </h3>
@@ -209,7 +209,7 @@ export default class pdfContainer extends Component {
               </div>
               <div>
                 <button type="submit" value="Submit" className="btn btn-positive">Save</button>
-              </div>
+              </div> 
 
             </form>
             <nav className="nav-group">
@@ -227,7 +227,7 @@ export default class pdfContainer extends Component {
             </form>
           </div>
 
-          <div className="pane" style={{ "padding": "1rem", "margin": "2.5rem" }}>
+          <div className="pane">
             <Document
               file={this.state.file}
               onLoadSuccess={this.onDocumentLoadSuccess}

@@ -41,9 +41,12 @@ let exportedMethods = {
         };
 
         let updatedInfo = await pdfCollection.updateOne({ username: username }, { $push: { pdfs: newPDF } });
+        
         if (updatedInfo.modifiedCount === 0) {
-            addUser(username)
+
+            await this.addUser(username)
             updatedInfo = await pdfCollection.updateOne({ username: username }, { $push: { pdfs: newPDF } });
+            
             if (updatedInfo.modifiedCount === 0) {
                 throw "could not update pdf successfully";
             }
@@ -60,11 +63,10 @@ let exportedMethods = {
             comment: comment,
             pageNum: pageNum
         };
-        console.log("here?")
+
         let checkExists = await pdfCollection.find({ username: username, 'pdfs.pdfName': pdfName, "pdfs.comments.pageNum": pageNum }).toArray()
 
         if (checkExists.length === 0) {
-            console.log("here")
             const updatedInfo = await pdfCollection.updateOne({ username: username, 'pdfs.pdfName': pdfName }, { $push: { "pdfs.$.comments": newComment } });
             if (updatedInfo.modifiedCount === 0) {
                 throw "could not update pdf successfully";
@@ -72,10 +74,7 @@ let exportedMethods = {
         } else {
             let i
             let comment = {}
-            console.log("here3000")
-            // console.log(newpdf[0].pdfs)
             for(i in checkExists[0].pdfs){
-                // console.log(newpdf[0].pdfs[i])
                 if(checkExists[0].pdfs[i].pdfName == pdfName){
                     for(j in checkExists[0].pdfs[i].comments){
                         if(checkExists[0].pdfs[i].comments[j].pageNum == pageNum){
@@ -89,14 +88,9 @@ let exportedMethods = {
 
             const updatedInfo = await pdfCollection.updateOne({ username: username, 'pdfs.pdfName': pdfName }, { $push: { "pdfs.$.comments": newComment } });
 
-            // console.log(deletionInfo.modifiedCount)
-            // const updatedInfo = await pdfCollection.updateOne({ username: username, 'pdfs.pdfName': pdfName }, { $push: { "pdfs.$.comments": newComment } });
-
-            // console.log(updatedInfo)
             if (updatedInfo.modifiedCount === 0) {
                 throw "could not update pdf successfully";
             }
-            console.log("here3?")
         }
         return await this.getPDF(username);
     },
@@ -107,14 +101,5 @@ let exportedMethods = {
     }
 
 }
-//     async removeMessage(chatroomId, messageId) {
-//         const chatCollection = await chats();
-//         const deletionInfo = await chatCollection.updateOne({_id: userId}, {$pull: {messages: {id:messageId}}});
-//         if (deletionInfo.modifiedCount === 0) {
-//             throw `Could not delete message with id of ${messageId}`;
-//         }
-//         return await this.getChatroomById(chatroomId);
-//     }
-// };
 
 module.exports = exportedMethods;

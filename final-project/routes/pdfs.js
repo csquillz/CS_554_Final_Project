@@ -23,11 +23,12 @@ router.post("/user/:username", async (req, res) => {
 });
 
 router.post("/addPDF", async (req, res) => {
+
     const pdfInfo = req.body;
     try {
         const { pdfName, username} = pdfInfo
         const newpdf = await pdfData.addPDF(pdfName, username)
-        console.log(newpdf)
+
         res.json(newpdf);
     } catch (e) {
         res.status(404).json({ error: e });
@@ -49,13 +50,10 @@ router.post("/comments", async (req, res) => {
 router.get("/comments/:username/:fileName", async (req, res) => {
     try {
         let pdfName = req.params.fileName
-        // console.log(req.params.fileName)
         const newpdf = await pdfData.getComments(req.params.fileName, req.params.username)
         let i
         let comments = []
-        // console.log(newpdf[0].pdfs)
         for(i in newpdf[0].pdfs){
-            // console.log(newpdf[0].pdfs[i])
             if(newpdf[0].pdfs[i].pdfName == pdfName){
                 comments = newpdf[0].pdfs[i].comments
             }

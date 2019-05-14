@@ -170,4 +170,11 @@ code {
 
 .messagesList{
   overflow: auto;
+  /* position: relative; */
+  height: calc(77vh - 40px);
+  /* position: absolute; */
+}
+
+.chatRoom{
+  position: relative;
 }

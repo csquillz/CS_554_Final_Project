@@ -8,9 +8,6 @@ import Header from './header';
 import firebase from 'firebase';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
-let colors = ["#fc605b", "#fdbc40", "#34c84a", "#57acf5"];
-let colorsCounter = -1;
-
 
 export default class pdfContainer extends Component {
   state = {
@@ -31,26 +28,26 @@ export default class pdfContainer extends Component {
       comments: [],
       files: []
     }
+
     this.handleUpload = this.handleUpload.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    firebase.auth().onAuthStateChanged(this.onAuthChage.bind(this));
+
   }
 
   async onAuthChage(user) {
     let username = ""
-    if (user.displayName) {
-      username = user.displayName
-    }
-    else {
-      username = user.email
-      username = username.substring(0, username.indexOf('@'));
+    if (user) {
+      if (user.displayName) {
+        username = user.displayName
+      } else {
+        username = user.email
+        username = username.substring(0, username.indexOf('@'));
+      }
     }
 
     await this.setState({ username: username })
-
-    // await axios.post("http://localhost:5000/api/pdfs/user/" + username, {
-    // }).then(data => console.log(data.data))
-
   }
 
   async componentDidMount() {
@@ -64,33 +61,33 @@ export default class pdfContainer extends Component {
 
   async handleSubmit(event) {
     event.preventDefault();
-    //call to database and set comments list
-    console.log(event.target)
+
     await axios.post("http://localhost:5000/api/pdfs/comments/", {
       pdfName: this.state.fileName,
       username: this.state.username,
       comment: this.state.comment,
       pageNum: this.state.pageNumber
-    }).then(data => console.log(data.data))
+    }).then(data => data.data)
 
     await axios.get("http://localhost:5000/api/pdfs/comments/" + this.state.username + "/" + this.state.fileName)
-        .then(data => data.data)
-        .then(res => this.setState({ comments: [...res] }));
-        let i = 0;
-        for (i in this.state.comments) {
-          if (this.state.comments[i].pageNum == this.state.pageNumber) {
-             this.setState({ comment: this.state.comments[i].comment })
-          }
-        }
+      .then(data => data.data)
+      .then(res => this.setState({ comments: [...res] }));
+
+    let i = 0;
+    for (i in this.state.comments) {
+      if (this.state.comments[i].pageNum == this.state.pageNumber) {
+        this.setState({ comment: this.state.comments[i].comment })
+      }
+    }
   }
 
   async handleChange(event) {
-    // console.log(this.state.files)
-    console.log(this.state.comments)
+
     await this.setState({ comment: event.target.value });
   }
 
   onDocumentLoadSuccess = (document) => {
+
     const { numPages } = document;
     this.setState({
       numPages,
@@ -106,15 +103,13 @@ export default class pdfContainer extends Component {
 
     let i = 0;
     for (i in this.state.comments) {
-      console.log(this.state.pageNumber)
       if (this.state.comments[i].pageNum == this.state.pageNumber + offset) {
         this.setState({ comment: this.state.comments[i].comment })
         break
-      }else{
+      } else {
         this.setState({ comment: "" })
       }
     }
-
   }
 
   previousPage = () => this.changePage(-1);
@@ -127,37 +122,38 @@ export default class pdfContainer extends Component {
     let file = ""
     let fileName = ""
     let reader = new FileReader()
-    reader.readAsDataURL(files[0])
-    reader.onload = (e) => {
-      // console.log(e.target.result)
-      file = e.target.result
-      this.setState({ file: file })
-    }
-    fileName = files[0].name
-    await this.setState({ fileName: fileName })
-    console.log(this.state.username)
-    // await this.setState({ files: [...this.state.files, fileName] })
-    // console.log(this.state.files)
 
-    // console.log(this.state.files.find(function(eylem){ return elem.pdfName == fileName }))
-    if (this.state.files.find(function (elem) { return elem.pdfName == fileName })) {
-      await axios.get("http://localhost:5000/api/pdfs/comments/" + this.state.username + "/" + fileName)
-        .then(data => data.data)
-        .then(res => this.setState({ comments: [...res] }));
+    if (files[0] !== undefined) {
+
+      reader.readAsDataURL(files[0])
+      reader.onload = (e) => {
+        file = e.target.result
+        this.setState({ file: file })
+      }
+
+      fileName = files[0].name
+
+      await this.setState({ fileName: fileName })
+
+      if (this.state.files.find(function (elem) { return elem.pdfName == fileName })) {
+        await axios.get("http://localhost:5000/api/pdfs/comments/" + this.state.username + "/" + fileName)
+          .then(data => data.data)
+          .then(res => this.setState({ comments: [...res] }));
         let i = 0;
         for (i in this.state.comments) {
-        //   // console.log(newpdf[0].pdfs[i])
           if (this.state.comments[i].pageNum == this.state.pageNumber) {
-             this.setState({ comment: this.state.comments[0].comment })
+            this.setState({ comment: this.state.comments[i].comment })
           }
         }
-        console.log(this.state.comment)
-    } else {
-      await axios.post("http://localhost:5000/api/pdfs/addPDF", {
-        pdfName: fileName,
-        username: this.state.username
-      }).then(data => data.data)
-        .then(res => this.setState({ files: [...res[0].pdfs] }));
+      } else {
+        this.setState({ comments: []})
+        this.setState({ comment: "" })
+        await axios.post("http://localhost:5000/api/pdfs/addPDF", {
+          pdfName: fileName,
+          username: this.state.username
+        }).then(data => data.data)
+          .then(res => this.setState({ files: [...res[0].pdfs] }));
+      }
     }
   }
 
@@ -180,75 +176,71 @@ export default class pdfContainer extends Component {
       textAlign: 'center',
     };
 
-    if (colorsCounter > 3) {
-      colorsCounter = -1;
-    }
-
     return (
       <div>
-          <div className="pane-group" style={{ "margin": "2.5rem" }}>
-            <div className="pane pane-one-fourth sidebar" style={{ "padding": "1rem", "margin": "2.5rem", "width": "auto" }}>
+        <div className="pane-group" style={{ "margin": "2.5rem" }}>
+          <div className="pane pane-one-fourth sidebar" style={{ "padding": "1rem", "margin": "2.5rem", "width": "auto" }}>
+            <h3>
+              Page {pageNumber || (numPages ? 1 : '--')} of {numPages || '--'}
+            </h3>
+            <button
+              type="button"
+              className="btn btn-success"
+              disabled={pageNumber <= 1}
+              onClick={this.previousPage}
+            >
+              Previous
+          </button>
+            <button
+              type="button"
+              disabled={pageNumber >= numPages}
+              onClick={this.nextPage}
+              className="btn btn-success"
+            >
+              Next
+          </button>
+
+            <form className="comment_form" onSubmit={this.handleSubmit}>
               <h3>
-                Page {pageNumber || (numPages ? 1 : '--')} of {numPages || '--'}
-              </h3>
-              <button
-                type="button"
-                className="btn btn-success"
-                disabled={pageNumber <= 1}
-                onClick={this.previousPage}
-              >
-                Previous
-          </button>
-              <button
-                type="button"
-                disabled={pageNumber >= numPages}
-                onClick={this.nextPage}
-                className="btn btn-success"
-              >
-                Next
-          </button>
-
-              <form className="comment_form" onSubmit={this.handleSubmit}>
-                <h3>
-                  Comment:
+                Comment:
                 </h3>
-                <div>
-                  <textarea type="text" className="commentText" name="comment" value={this.state.comment} placeholder="Add a Comment..." onChange={this.handleChange}></textarea>
-                </div>
-                <div>
-                  <button type="submit" value="Submit" className="btn btn-positive">Save</button>
-                </div>
+              <div>
+                <textarea type="text" className="commentText" name="comment" value={this.state.comment} placeholder="Add a Comment..." onChange={this.handleChange}></textarea>
+              </div>
+              <div>
+                <button type="submit" value="Submit" className="btn btn-positive">Save</button>
+              </div>
 
-              </form>
-              <nav className="nav-group">
-                <h5>Already Uploaded:</h5>
+            </form>
+            <nav className="nav-group">
+              <h5>Already Uploaded:</h5>
 
-                {this.state.files.map(item => (
-                  <span className="nav-group-item" key={item.pdfName}>
-                    <span className="icon icon-record"></span>
-                    {item.pdfName}
-                  </span>
-                ))}
-              </nav>
-              <form className="comment_form" onSubmit={this.handleUpload}>
-                <input className="form-control" name="file" ref={(ref) => { this.uploadInput = ref; }} type="file" onChange={this.handleUpload} />
-              </form>
-            </div>
-
-            <div className="pane" style={{ "padding": "1rem", "margin": "2.5rem" }}>
-              <Document
-                file={this.state.file}
-                onLoadSuccess={this.onDocumentLoadSuccess}
-                style={divStyle}
-              >
-                <Page size="A1" pageNumber={pageNumber} style={styles.page}   >
-                  <View style={styles.section}>
-                  </View>
-                </Page>
-              </Document>
-            </div>
+              {this.state.files.map(item => (
+                <span className="nav-group-item" key={item.pdfName}>
+                  <span className="icon icon-record"></span>
+                  {item.pdfName}
+                </span>
+              ))}
+            </nav>
+            <form className="comment_form" onSubmit={this.handleUpload}>
+              <input className="form-control" name="file" ref={(ref) => { this.uploadInput = ref; }} type="file" onChange={this.handleUpload} />
+            </form>
           </div>
+
+          <div className="pane" style={{ "padding": "1rem", "margin": "2.5rem" }}>
+            <Document
+              file={this.state.file}
+              onLoadSuccess={this.onDocumentLoadSuccess}
+              style={divStyle}
+            >
+              <Page size="A1" pageNumber={pageNumber} style={styles.page}   >
+                <View style={styles.section}>
+                </View>
+              </Page>
+            </Document>
           </div>
+        </div>
+      </div>
     );
   }
 }

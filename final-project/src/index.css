@@ -158,10 +158,8 @@ code {
 .pdfPagetext{
   font-family: Times, TimesNR, 'New Century Schoolbook',Georgia, 'New York', serif;
   font-style:oblique;
-  /* color: green; */
   font-weight:bold;
   font-size:24px;
-
 }
 
 .nav-group{
@@ -170,9 +168,7 @@ code {
 
 .messagesList{
   overflow: auto;
-  /* position: relative; */
-  height: calc(77vh - 40px);
-  /* position: absolute; */
+  height: calc(77vh - 20px);
 }
 
 .chatRoom{
@@ -266,3 +262,30 @@ margin: 2rem
 .toolbar.toolbar-header{
   pointer-events: auto;
 }
+
+.btn.btn-success{
+  margin-right: .5rem;
+}
+
+.accountTitle{
+  text-align: center;
+}
+
+.passwordForm{
+  margin: 1rem
+}
+
+.password{
+  margin-right: 1rem
+}
+
+.passwordFromDiv{
+  display: block;
+  text-align: center;
+}
+
+.btn.btn-default.signoutBtn{
+  position: absolute;
+  right: 10px;
+}
+

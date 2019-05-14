@@ -10,9 +10,8 @@ const AccountPage = () => (
     {authUser => (
       <div>
         {console.log(authUser.displayName)}
-        <h1>Account: {authUser.email}</h1>
+        <h1 className= "accountTitle">Account: {authUser.email}</h1>
         <PasswordChangeForm />
-        <SignOutButton />
       </div>
     )}
   </AuthUserContext.Consumer>

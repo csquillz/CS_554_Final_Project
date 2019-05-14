@@ -168,21 +168,23 @@ class Chat extends React.Component {
             <div>
                 <header className="toolbar toolbar-header">
                     <div className="toolbar-actions">
-                        <h1 className="chatTitle" style={{ "margin": "0.2rem" }}>{this.state.roomName === "" ? ( name === null ? "-" : name) : this.state.roomName}</h1>
+                        <h1 className="chatTitle" style={{ "margin": "0.2rem" }}>{this.state.roomName === "" ? "-" : this.state.roomName}</h1>
                         {/* <h3 className="chatTitle" style={{"margin": "0.5rem"}}>Testing testing</h3> */}
                         <form className="addChatRoom" onSubmit={this.addRoom}>
                             <input type="text" value={this.state.roomInput} style={{ "float": "left" }} name="roomInput" onChange={this.handleChange} />
                             <div style={{ "overflow": "hidden", "padding-left": ".2em", "padding-right": ".2em" }}>
-                                <button className="btn btn-default" type="submit" style={{ "width": "100%" }}>Submit</button>
+                                <button className="btn btn-default" type="submit" style={{ "width": "100%" }}>Add a Room!</button>
                             </div>
                         </form>
                     </div>
                 </header>
+                <div className="messagesList">
                 <ul className="messages">
                     {this.state.messages.map(item => (
                         <li key={item}>{item}</li>
                     ))}
                 </ul>
+                
                 <form className="chatbox" onSubmit={this.handleSubmit}>
 
                     <select className="form-control dropdown" id="room-selector" onChange={this.handleRoomChange}>

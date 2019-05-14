@@ -1,10 +1,10 @@
 import React from "react";
 import io from "socket.io-client";
 import axios from "axios";
-import { withAuthorization } from '../components/Session/';
 import firebase from 'firebase';
-import Header from './header';
-
+import { withFirebase } from '../components/Firebase';
+import {withAuthorization} from '../components/Session';
+let name = null;
 let socket = io("http://localhost:4000");
 class Chat extends React.Component {
 
@@ -27,7 +27,7 @@ class Chat extends React.Component {
         this.handleRoomChange = this.handleRoomChange.bind(this);
         this.addRoom = this.addRoom.bind(this);
         this.addMessage = this.addMessage.bind(this);
-
+        firebase.auth().onAuthStateChanged(this.onAuthChage.bind(this));
     }
 
     onAuthChage(user) {
@@ -40,7 +40,7 @@ class Chat extends React.Component {
             username = username.substring(0, username.indexOf('@'));
         }
         this.setState({ username: username })
-
+        name = username;
         console.log(user)
 
     }
@@ -165,7 +165,7 @@ class Chat extends React.Component {
 
     render() {
         return (
-            <Header propEx={this.props}>
+            <div>
                 <header className="toolbar toolbar-header">
                     <div className="toolbar-actions">
                         <h1 className="chatTitle" style={{ "margin": "0.2rem" }}>{this.state.roomName === "" ? "-" : this.state.roomName}</h1>
@@ -173,16 +173,18 @@ class Chat extends React.Component {
                         <form className="addChatRoom" onSubmit={this.addRoom}>
                             <input type="text" value={this.state.roomInput} style={{ "float": "left" }} name="roomInput" onChange={this.handleChange} />
                             <div style={{ "overflow": "hidden", "padding-left": ".2em", "padding-right": ".2em" }}>
-                                <button className="btn btn-default" type="submit" style={{ "width": "100%" }}>Submit</button>
+                                <button className="btn btn-default" type="submit" style={{ "width": "100%" }}>Add a Room!</button>
                             </div>
                         </form>
                     </div>
                 </header>
+                <div className="messagesList">
                 <ul className="messages">
                     {this.state.messages.map(item => (
                         <li key={item}>{item}</li>
                     ))}
                 </ul>
+                
                 <form className="chatbox" onSubmit={this.handleSubmit}>
 
                     <select className="form-control dropdown" id="room-selector" onChange={this.handleRoomChange}>
@@ -196,7 +198,7 @@ class Chat extends React.Component {
                         Submit
                         </button>
                 </form>
-            </Header>
+                </div>
         )
     }
 }

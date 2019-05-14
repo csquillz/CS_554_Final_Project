@@ -98,7 +98,6 @@ code {
 
 .comment_form{
   position: relative;
-  padding-top: 3rem;
 }
 
 .comment_form button{
@@ -163,4 +162,12 @@ code {
   font-weight:bold;
   font-size:24px;
 
+}
+
+.nav-group{
+  margin-bottom: 1rem;
+}
+
+.messagesList{
+  overflow: auto;
 }

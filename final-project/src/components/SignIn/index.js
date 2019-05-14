@@ -49,15 +49,7 @@ class SignInFormBase extends Component {
   onSubmitGoogle = event => {
     var provider = new firebase.auth.GoogleAuthProvider();
     provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-<<<<<<< HEAD
   
-=======
-
-    provider.setCustomParameters({
-      'login_hint': 'user@example.com'
-    });
-
->>>>>>> 29a7cbb0822e164506d038e13e3de2d818fa4bac
     firebase.auth().signInWithRedirect(provider);
 
     firebase.auth().getRedirectResult().then(() => {

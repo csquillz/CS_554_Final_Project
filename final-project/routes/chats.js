@@ -48,7 +48,7 @@ router.post("/messages", async (req, res) => {
         }
 
         let me = await client.rpushAsync(chatroomName, jsonMessage)
-        console.log(await client.lrangeAsync(chatroomName, 0, -1))
+        // console.log(await client.lrangeAsync(chatroomName, 0, -1))
         res.json(newMessage);
     } catch (e) {
         res.status(500).json({ error: e });
@@ -71,55 +71,5 @@ router.get("/messages/:id", async (req, res) => {
         res.status(500).json({ error: e });
     }
 });
-
-
-
-// router.post("/:id/messages", async (req, res) => {
-
-//     const id = req.params.id;
-//     const messageInfo = req.body;
-
-//     if (!messageInfo.username) {
-//         res.status(400).json({ error: "You must provide a username" });
-//         return;
-//     }
-//     if (!messageInfo.message) {
-//         res.status(400).json({ error: "You must provide a message" });
-//         return;
-//     }
-
-//     if (typeof messageInfo.username !== "string") {
-//         res.status(400).json({ error: "Username not valid" });
-//         return;
-//     }
-//     if (typeof messageInfo.message !== "string") {
-//         res.status(400).json({ error: "Message not valid" });
-//         return;
-//     }
-
-//     try {
-//         const { username, message } = messageInfo
-//         const newMessage = await chatData.addMessages(id, username, message);
-//         res.json(newMessage);
-//     } catch (e) {
-//         res.status(500).json({ error: e });
-//     }
-// });
-
-// router.delete("/:chatroomId/:messageId", async (req, res) => {
-
-//     try {
-//         await chatData.getChatroomById(req.params.chatId);
-//     } catch (e) {
-//         res.status(404).json({ error: e });
-//     }
-
-//     try {
-//         const updatedChat = await chatData.removeMessage(req.params.chatroomId, req.params.messageId);
-//         res.json(updatedChat);
-//     } catch (e) {
-//         res.status(500).json({ error: e });
-//     }
-// });
 
 module.exports = router;

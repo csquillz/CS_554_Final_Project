@@ -30,34 +30,44 @@ let exportedMethods = {
     },
 
     async addChatroom(chatroomName) {
-        return chats().then(chatCollection => {
-            let newChat = {
-                _id: uuid.v4(),
-                chatroomName: chatroomName,
-                messages: []
-            };
+        let rooms = await this.getChatrooms()
 
-            return chatCollection
-                .insertOne(newChat)
-                .then(newInsertInformation => {
-                    return newInsertInformation.insertedId;
-                })
-                .then(newId => {
-                    return this.getChatroomById(newId);
-                });
-        });
+        let room = rooms.find(function (elem) {
+            return elem.chatroomName == chatroomName
+        })
+
+        if (room) {
+            return chats().then(chatCollection => {
+                let newChat = {
+                    _id: uuid.v4(),
+                    chatroomName: chatroomName,
+                    messages: []
+                };
+
+                return chatCollection
+                    .insertOne(newChat)
+                    .then(newInsertInformation => {
+                        return newInsertInformation.insertedId;
+                    })
+                    .then(newId => {
+                        return this.getChatroomById(newId);
+                    });
+            });
+        }else{
+            return false
+        }
     },
-    
-    
+
+
     async addMessage(message, chatroomName) {
         const chatCollection = await chats();
-        
+
         let newMessage = {
             id: uuid.v4(),
             message: message
         };
 
-        const updatedInfo = await chatCollection.updateOne({ chatroomName: chatroomName }, { $push: {messages: newMessage}});
+        const updatedInfo = await chatCollection.updateOne({ chatroomName: chatroomName }, { $push: { messages: newMessage } });
         if (updatedInfo.modifiedCount === 0) {
             throw "could not update chat successfully";
         }
@@ -67,23 +77,13 @@ let exportedMethods = {
 
     async getMessages(chatroomName) {
         const chatCollection = await chats();
-        
+
         let chatRoom = await this.getChatroomByName(chatroomName)
 
         return chatRoom.messages
-        
-    
-    } 
+
+    }
 
 }
-//     async removeMessage(chatroomId, messageId) {
-//         const chatCollection = await chats();
-//         const deletionInfo = await chatCollection.updateOne({_id: userId}, {$pull: {messages: {id:messageId}}});
-//         if (deletionInfo.modifiedCount === 0) {
-//             throw `Could not delete message with id of ${messageId}`;
-//         }
-//         return await this.getChatroomById(chatroomId);
-//     }
-// };
 
 module.exports = exportedMethods;

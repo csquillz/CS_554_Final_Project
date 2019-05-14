@@ -2,8 +2,8 @@ import React from "react";
 import io from "socket.io-client";
 import axios from "axios";
 import firebase from 'firebase';
-import { withFirebase } from '../components/Firebase';
-import {withAuthorization} from '../components/Session';
+import { withAuthorization } from '../components/Session';
+
 let name = null;
 let socket = io("http://localhost:4000");
 class Chat extends React.Component {
@@ -96,15 +96,15 @@ class Chat extends React.Component {
         // await this.setState({ messages: [...welcomeMessage.messages] })
     }
 
-    addMessage(message){
-        this.setState({ messages: [...this.state.messages, message] })        
+    addMessage(message) {
+        this.setState({ messages: [...this.state.messages, message] })
     }
 
-    addtoRedis(message){
+    addtoRedis(message) {
         axios.post("http://localhost:5000/api/chatrooms/messages", {
             message: message,
             chatroomName: this.state.roomName
-        }).then(data => data.data)  
+        }).then(data => data.data)
     }
 
     async addRoom(event) {
@@ -140,9 +140,10 @@ class Chat extends React.Component {
 
         // console.log(currRoom)
         // console.log(this.state.roomName)
-        await this.setState({ messages: await axios.get("http://localhost:5000/api/chatrooms/messages/"+currRoom)
-            .then(data => data.data)
-            .then(res => res)
+        await this.setState({
+            messages: await axios.get("http://localhost:5000/api/chatrooms/messages/" + currRoom)
+                .then(data => data.data)
+                .then(res => res)
         });
         // console.log("ans also here")
         // console.log(prevMessages)
@@ -179,12 +180,12 @@ class Chat extends React.Component {
                     </div>
                 </header>
                 <div className="messagesList">
-                <ul className="messages">
-                    {this.state.messages.map(item => (
-                        <li key={item}>{item}</li>
-                    ))}
-                </ul>
-                
+                    <ul className="messages">
+                        {this.state.messages.map(item => (
+                            <li key={item}>{item}</li>
+                        ))}
+                    </ul>
+                </div>
                 <form className="chatbox" onSubmit={this.handleSubmit}>
 
                     <select className="form-control dropdown" id="room-selector" onChange={this.handleRoomChange}>
@@ -198,7 +199,9 @@ class Chat extends React.Component {
                         Submit
                         </button>
                 </form>
-                </div>
+
+
+            </div>
         )
     }
 }

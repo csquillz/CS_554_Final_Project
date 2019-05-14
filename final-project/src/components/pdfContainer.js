@@ -6,6 +6,7 @@ import "react-pdf-reader/dist/TextLayerBuilder.css";
 import axios from "axios";
 import Header from './header';
 import firebase from 'firebase';
+
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 let colors = ["#fc605b", "#fdbc40", "#34c84a", "#57acf5"];
 let colorsCounter = -1;
@@ -184,8 +185,7 @@ export default class pdfContainer extends Component {
     }
 
     return (
-      <Header propEx={this.props}>
-        <div classes="window-content">
+      <div>
           <div className="pane-group" style={{ "margin": "2.5rem" }}>
             <div className="pane pane-one-fourth sidebar" style={{ "padding": "1rem", "margin": "2.5rem", "width": "auto" }}>
               <h3>
@@ -248,8 +248,7 @@ export default class pdfContainer extends Component {
               </Document>
             </div>
           </div>
-        </div>
-      </Header>
+          </div>
     );
   }
 }

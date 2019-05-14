@@ -78,9 +78,9 @@ class App extends Component {
                     <Navigation/>
                     <Route exact path={ROUTES.LANDING} component={Landing} />
                     <Route exact path={ROUTES.SIGN_IN} component={SignInPage} />
-                    <PrivateRoute exact path={ROUTES.CHAT} component={Chat} authenticated={this.state.authenticated}/>
-                    <PrivateRoute exact path={ROUTES.PDF} component={pdfContainer} authenticated={this.state.authenticated}/>
-                    <PrivateRoute exact path={ROUTES.HOME} component={HomePage} authenticated={this.state.authenticated}/>
+                    <Route exact path={ROUTES.CHAT} component={Chat}/>
+                    <Route exact path={ROUTES.PDF} component={pdfContainer}/>
+                    <Route exact path={ROUTES.HOME} component={HomePage}/>
                     <Route exact path={ROUTES.SIGN_UP} component={SignUpPage} />
                     <Route exact path={ROUTES.ACCOUNT} component={AccountPage} />
                     <Route exact path={ROUTES.PASSWORD_FORGET} component={PasswordForgetForm} />

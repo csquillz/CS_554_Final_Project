@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { compose, setDisplayName } from 'recompose';
-import Header from '../header';
 import { withFirebase } from '../Firebase';
 import { Link, withRouter } from 'react-router-dom';
-import Chat from "../chatRoom"
 import * as ROUTES from "../../const/routes"
-
 
 const SignUpPage = () => (
   <div style={{"margin": "2rem"}}>
@@ -32,7 +29,6 @@ class SignUpFormBase extends Component {
 
   onSubmit = event => {
     const { username, email, passwordOne } = this.state;
-    console.log(username)
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne, username)
       .then(authUser => {
@@ -122,7 +118,7 @@ class SignUpFormBase extends Component {
             className="form-control"
           placeholder="Confirm Password"
           />
-          </div>
+        </div>
         <button style={{"marginTop" : "0.8rem"}} className="btn btn-large btn-positive" disabled={isInvalid} type="submit">
           Sign Up
         </button>

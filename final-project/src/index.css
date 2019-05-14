@@ -175,6 +175,94 @@ code {
   position: relative;
 }
 
+.sign-in{
+  margin: 2rem
+}
+
+.btn.btn-large.btn-default{
+  margin-right: .8rem
+}
+
+.btn.btn-large.btn-primary{
+  margin-right: .8rem
+}
+
+.chatTitle{
+  margin: 0.2rem
+}
+
+.chat-header{
+  overflow: hidden;
+  padding-left: .2em;
+  padding-right: .2em;
+}
+
+.chatInput{
+  float: left;
+}
+
+.welcome-page{
+margin: 2rem
+}
+
+.pw-forget{
+  margin: 1rem;
+  margin-top: 2rem;
+}
+
+.pw-forget-link{
+  color: red; 
+  text-decoration: none; 
+  cursor: pointer;
+}
+
+.pane{
+  padding: 1rem; 
+  margin:  2.5rem;
+}
+
+.pane-group{
+  margin: 2.5rem;
+}
+
+.pane.pane-one-fourth.sidebar{
+  padding: 1rem; 
+  margin: 2.5rem; 
+  width: auto;
+}
+
+.sign-up{
+  margin: 2rem;
+}
+
+.sign-up-form{
+  margin: 1rem;
+}
+
+.btn.btn-large.btn-negative{
+  margin-top:0.8rem;
+}
+
+.btn.btn-large.btn-positive{
+  margin-right:0.8rem;
+  margin-top:0.8rem;
+}
+
+.sign-up-link{
+  margin: 1rem; 
+  margin-top: 2rem;
+}
+
+.sign-up-noacc{
+  color: #1073f3;
+   text-decoration: none;
+   cursor: pointer;
+}
+
+.toolbar.toolbar-header{
+  pointer-events: auto;
+}
+
 .btn.btn-success{
   margin-right: .5rem;
 }
@@ -200,3 +288,4 @@ code {
   position: absolute;
   right: 10px;
 }
+

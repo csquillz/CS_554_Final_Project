@@ -145,11 +145,11 @@ class Chat extends React.Component {
             <div>
                 <header className="toolbar toolbar-header">
                     <div className="toolbar-actions">
-                        <h1 className="chatTitle" style={{ "margin": "0.2rem" }}>{this.state.roomName === "" ? "-" : this.state.roomName}</h1>
+                        <h1 className="chatTitle">{this.state.roomName === "" ? "-" : this.state.roomName}</h1>
                         <form className="addChatRoom" onSubmit={this.addRoom}>
-                            <input type="text" value={this.state.roomInput} style={{ "float": "left" }} name="roomInput" onChange={this.handleChange} />
-                            <div style={{ "overflow": "hidden", "padding-left": ".2em", "padding-right": ".2em" }}>
-                                <button className="btn btn-default" type="submit" style={{ "width": "100%" }}>Add a Room!</button>
+                            <input className="chatInput" type="text" value={this.state.roomInput} name="roomInput" onChange={this.handleChange} />
+                            <div classname="chat-header">
+                                <button className="btn btn-default" type="submit">Add a Room!</button>
                             </div>
                         </form>
                     </div>

@@ -8,7 +8,7 @@ import firebase from 'firebase';
 import * as ROUTES from "../../const/routes"
 
 const SignInPage = () => (
-  <div style={{ "margin": "2rem" }}>
+  <div classname = "sign-in">
     <h2>Sign In</h2>
     <SignInForm />
     <PasswordForgetLink />
@@ -37,7 +37,7 @@ class SignInFormBase extends Component {
       .doSignInWithEmailAndPassword(email, password)
       .then(() => {
         this.setState({ ...INITIAL_STATE });
-        this.props.history.push(ROUTES.CHAT);
+        this.props.history.push(ROUTES.HOME);
       })
       .catch(error => {
         this.setState({ error });
@@ -54,7 +54,7 @@ class SignInFormBase extends Component {
 
     firebase.auth().getRedirectResult().then(() => {
       this.setState({ ...INITIAL_STATE });
-      this.props.history.push(ROUTES.CHAT);
+      this.props.history.push(ROUTES.HOME);
     })
       .catch(error => {
         this.setState({ error });
@@ -73,7 +73,7 @@ class SignInFormBase extends Component {
     const isInvalid = password === '' || email === '';
 
     return (
-      <form onSubmit={this.onSubmit} style={{ "margin": "1rem" }}>
+      <form onSubmit={this.onSubmit} class="sign-in-2">
         <div className="form-group">
           <label>Email Address</label>
           <input
@@ -94,7 +94,7 @@ class SignInFormBase extends Component {
             className="form-control"
           />
         </div>
-        <button style={{ "marginRight": ".8rem" }} className="btn btn-large btn-default" disabled={isInvalid} type="submit">
+        <button className="btn btn-large btn-default" disabled={isInvalid} type="submit">
           Sign In
         </button>
         <button className="btn btn-large btn-primary" type="submit" onClick={this.onSubmitGoogle}>

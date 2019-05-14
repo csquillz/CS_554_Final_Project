@@ -5,7 +5,7 @@ import { Link, withRouter } from 'react-router-dom';
 import * as ROUTES from "../../const/routes"
 
 const SignUpPage = () => (
-  <div style={{"margin": "2rem"}}>
+  <div className="sign-up">
     <h1>Sign Up</h1>
     <SignUpForm />
   </div>
@@ -74,7 +74,7 @@ class SignUpFormBase extends Component {
       username === '';
 
     return (
-      <form onSubmit={this.onSubmit} style={{"margin": "1rem"}}>
+      <form className="sign-up-form" onSubmit={this.onSubmit}>
         <div className="form-group">
         <label>Full Name</label>
         <input
@@ -119,10 +119,10 @@ class SignUpFormBase extends Component {
           placeholder="Confirm Password"
           />
         </div>
-        <button style={{"marginTop" : "0.8rem"}} className="btn btn-large btn-positive" disabled={isInvalid} type="submit">
+        <button className="btn btn-large btn-positive" disabled={isInvalid} type="submit">
           Sign Up
         </button>
-        <button style={{"marginTop" : "0.8rem", "marginLeft" : "0.8rem"}} className="btn btn-large btn-negative" onClick={() => {this.props.history.push("/")}} >
+        <button className="btn btn-large btn-negative" onClick={() => {this.props.history.push("/")}} >
           Go Back
         </button>
         {error && <p>{error.message}</p>}
@@ -132,8 +132,8 @@ class SignUpFormBase extends Component {
 }
 
 const SignUpLink = () => (
-  <p style={{"margin": "1rem", "marginTop": "2rem"}}>
-    Don't have an account? <Link to={ROUTES.SIGN_UP} style={{"color": "#1073f3", "textDecoration": "none", "cursor": "pointer"}}>Sign Up</Link>
+  <p className="sign-up-link">
+    Don't have an account? <Link to={ROUTES.SIGN_UP} className="sign-up-noacc">Sign Up</Link>
   </p>
 );
 

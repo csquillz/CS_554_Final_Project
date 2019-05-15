@@ -3,13 +3,13 @@ import 'firebase/auth';
 import 'firebase/database';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyByKygBO_fpEMbRRHt73xL0I2rVOvTrHkM",
-  authDomain: "cs554project.firebaseapp.com",
-  databaseURL: "https://cs554project.firebaseio.com",
-  projectId: "cs554project",
-  storageBucket: "cs554project.appspot.com",
-  messagingSenderId: "585876708249",
-  appId: "1:585876708249:web:5d48a6df6313c36c"
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_DATABASE_URL,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID
 };
 
 class Firebase {
@@ -18,6 +18,8 @@ class Firebase {
 
     this.auth = app.auth();
     this.db = app.database();
+
+    this.googleProvider = new app.auth.GoogleAuthProvider();
   }
 
   doCreateUserWithEmailAndPassword = (email, password, username) =>
@@ -36,6 +38,9 @@ class Firebase {
   user = uid => this.db.ref(`users/${uid}`);
 
   users = () => this.db.ref('users');
+
+  doSignInWithGoogle = () =>
+    this.auth.signInWithPopup(this.googleProvider);
 }
 
 export default Firebase;

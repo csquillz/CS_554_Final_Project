@@ -7,9 +7,8 @@
 ## How to Run
 - Clone the repository
 - Open a command window and  run the command "npm run seed" to add information to the database
-- After that is complete, run the command "npm startServers" to start the MongoDB and socket.io servers
+- After that is complete, run the command "npm run electron" to start the MongoDB and socket.io servers and app servers in electron
 - After that is complete, run the command "redis-server" in another window to start the redis server
-- After that is complete, run the command "npm start" to start the server
 - Navigate to "http://localhost:3000/" in your browser
 - Sign up using the login feature
 - You should now be redirected to the chat part of the application

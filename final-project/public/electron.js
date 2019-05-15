@@ -16,8 +16,12 @@ function createWindow() {
         minHeight: 700,
         movable: true,
         titleBarStyle: "hidden",
-        resizable: true
+        resizable: true,
+        webPreferences: {
+            webSecurity: false
+        }
     });
+    console.log(isDev);
     mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
     mainWindow.on('closed', () => mainWindow = null);
     mainWindow.once('ready-to-show', () => {

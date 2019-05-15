@@ -6,7 +6,6 @@
     "email": "rrathor2@stevens.edu",
     "name": "Ravi, Rohan, Carol, Bin"
   },
-  "main": "/public/electron.js",
   "description": "CS554",
   "dependencies": {
     "@react-pdf/renderer": "^1.5.4",

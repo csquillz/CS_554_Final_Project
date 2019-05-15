@@ -2,6 +2,12 @@
   "name": "final-project",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "email": "rrathor2@stevens.edu",
+    "name": "Ravi, Rohan, Carol, Bin"
+  },
+  "main": "/public/electron.js",
+  "description": "CS554",
   "dependencies": {
     "@react-pdf/renderer": "^1.5.4",
     "@react-pdf/styled-components": "github:react-pdf/styled-components",
@@ -9,8 +15,6 @@
     "bluebird": "^3.5.4",
     "concurrently": "^4.1.0",
     "cors": "^2.8.5",
-    "electron": "^5.0.1",
-    "electron-builder": "^20.40.2",
     "electron-is-dev": "^1.1.0",
     "firebase": "^6.0.2",
     "flat": "^4.1.0",
@@ -36,14 +40,23 @@
   "main": "public/electron.js",
   "scripts": {
     "electron-dev": "concurrently \"npm start\" \"wait-on http://localhost:3000 && electron .\"",
-    "start": "concurrently \"react-scripts start\" \"node ./server/mongoServer.js\" \"node ./server/socketServer.js\"" ,
+    "start": "concurrently \"react-scripts start\" \"node ./server/mongoServer.js\" \"node ./server/socketServer.js\"",
     "start-mongo": "node ./server/mongoServer.js",
     "start-socket": "node ./server/socketServer.js",
     "seed": "node ./tasks/seed.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "preelectron-pack": "npm run build",
+    "electron-pack": "build -c.extraMetadata.main=/public/electron.js",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=/src/assets/icons/mac/icon.icns --prune=true --out=release-builds",
+    "package-win": "electron-packager . electron-App --overwrite --asar --platform=win32 --arch=ia32 --icon=/src/assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Classroom\"",
+    "package-linux": "electron-packager . electron-App --overwrite --asar --platform=linux --arch=x64 --icon=/src/assets/icons/png/1024x1024.png --prune=true --out=release-builds"
   },
+  "files": [
+    "build/**/*",
+    "node_modules/**/*"
+  ],
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -52,5 +65,10 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "electron": "^5.0.1",
+    "electron-packager": "^13.1.1",
+    "typescript": "^3.4.5"
+  }
 }

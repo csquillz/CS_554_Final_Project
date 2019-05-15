@@ -14,7 +14,6 @@ function createWindow() {
         height: 700,
         minWidth: 800,
         minHeight: 700,
-        icon: `${__dirname}/assets/icons/png/64x64.png`,
         movable: true,
         titleBarStyle: "hidden",
         resizable: true

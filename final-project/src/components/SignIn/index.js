@@ -30,6 +30,19 @@ class SignInFormBase extends Component {
     this.state = { ...INITIAL_STATE };
   }
 
+  // async onSubmit(e) {
+  //   e.preventDefault();
+  //   const { email, password } = this.state;
+
+  //   try {
+  //     this.props.firebase.doSignInWithEmailAndPassword(email, password);
+  //     this.setState({ ...INITIAL_STATE });
+  //     this.props.history.push(ROUTES.HOME);
+  //   } catch (e) {
+  //     console.log(e.code);
+  //   }
+  // }
+
   onSubmit = event => {
     const { email, password } = this.state;
 
@@ -46,16 +59,14 @@ class SignInFormBase extends Component {
     event.preventDefault();
   };
 
-  onSubmitGoogle = event => {
-    var provider = new firebase.auth.GoogleAuthProvider();
-    provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-  
-    firebase.auth().signInWithRedirect(provider);
+  onSubmitGoogle= event => {
 
-    firebase.auth().getRedirectResult().then(() => {
-      this.setState({ ...INITIAL_STATE });
-      this.props.history.push(ROUTES.HOME);
-    })
+    this.props.firebase
+      .doSignInWithGoogle()
+      .then(socialAuthUser => {
+        this.setState({ error: null });
+        this.props.history.push(ROUTES.HOME);
+      })
       .catch(error => {
         this.setState({ error });
       });

@@ -37,6 +37,8 @@
   "scripts": {
     "electron-dev": "concurrently \"npm start\" \"wait-on http://localhost:3000 && electron .\"",
     "start": "react-scripts start",
+    "start-mongo": "node ./server/mongoServer.js",
+    "start-socket": "node ./server/socketServer.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

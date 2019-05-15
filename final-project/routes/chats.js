@@ -43,7 +43,7 @@ router.post("/messages", async (req, res) => {
         
         let messageLength = await client.llenAsync(chatroomName);
 
-        if (messageLength === 15) {
+        if (messageLength === 20) {
             await client.lpopAsync(chatroomName)
         }
 

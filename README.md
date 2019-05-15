@@ -16,27 +16,22 @@
 - You can also access the pdf part of the application by clicking on the "documents" section in the navigation bar
 
 ## How to Use
-- Add a goal by clicking "Add Goal" and enter the category, amount, and month
-- Remove a goal by clicking the "Remove Goal" button under the desired goal
-- Add a transaction by clicking "Add Transaction: and enter type, store, amount, and date, and description
-- Remove a goal by clicking the "Remove Goal" button next to the desired transaction
-- View charts for the current month by clicking "View Charts"
-- Go back to the home page from the charts by clicking the title "Budget Tracker"
-- Logout by clicking "Logout" in the top right corner
+-You can join one of our chat rooms to interact with other students and discuss any problems or solution of the class by clicking on "Chatroom:. There are many separate rooms you can choose according to the courses. You can also create your own room which other students can join for chatting.
+-Also, you can working PDF documents by clikcing on "Documents" in the navigation bar and uploading the PDF you want to work on. Make comments on the pages for your reference and save each page to be viewd at a later time. This makes it easier to make notes while studying! To view the previously saved comments, you can simply reload the PDF you made the comments on!
+-You can also update your Account password by visiting the "MyAccount" page from the navigation bar
 
 ## Technologies
 
 **Tech Stack:**
+- React
 - HTML
 - CSS
 - Javascript
-- React
-- AJAX
+- Axios
 - JSON
-- Electron
+- Electron/Photon
 - Firebase
 - MongoDB
 - Socket.io
 - React-PDF
 - Redis
-

@@ -36,7 +36,7 @@ let exportedMethods = {
             return elem.chatroomName == chatroomName
         })
 
-        if (room) {
+        if (!room) {
             return chats().then(chatCollection => {
                 let newChat = {
                     _id: uuid.v4(),

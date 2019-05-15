@@ -19,13 +19,16 @@ dbConnection().then(
                 return dbConnection;
             })
             .then(db => {
-                return chats.addChatroom("Select a Room");
+            return chats.addChatroom("Select a Room").then(() =>{
+                return chats.addChatroom("CS554");
+            })
+
             })
             .then(() => {
                 console.log("Done seeding database");
                 db.serverConfig.close();
             })
     },
-error => {
-    console.error(error);
-});
+    error => {
+        console.error(error);
+    });

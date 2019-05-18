@@ -180,11 +180,14 @@ code {
 }
 
 .btn.btn-large.btn-default{
-  margin-right: .8rem
+  margin-right: .8rem;
+  margin-left: -0.1rem;
+  margin-top: 0.3rem
 }
 
 .btn.btn-large.btn-primary{
-  margin-right: .8rem
+  margin-right: .8rem;
+  margin-top: 0.3rem
 }
 
 .chatTitle{
@@ -222,7 +225,8 @@ margin: 2rem
 }
 
 .pane-group{
-  margin: 2.5rem;
+  margin-top: 2.5rem;
+  background: #f5f5f4;
 }
 
 .pane.pane-one-fourth.sidebar{
@@ -261,6 +265,11 @@ margin: 2rem
 
 .toolbar.toolbar-header{
   pointer-events: auto;
+  padding: 0.1rem
+}
+
+.btn.btn-default{
+  margin-left: 0.3rem
 }
 
 .btn.btn-success{
@@ -288,4 +297,6 @@ margin: 2rem
   position: absolute;
   right: 10px;
 }
+
+
 

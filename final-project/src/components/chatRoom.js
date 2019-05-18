@@ -148,7 +148,7 @@ class Chat extends React.Component {
                         <h1 className="chatTitle">{this.state.roomName === "" ? "-" : this.state.roomName}</h1>
                         <form className="addChatRoom" onSubmit={this.addRoom}>
                             <input className="chatInput" type="text" value={this.state.roomInput} name="roomInput" onChange={this.handleChange} />
-                            <div classname="chat-header">
+                            <div className="chat-header">
                                 <button className="btn btn-default" type="submit">Add a Room!</button>
                             </div>
                         </form>

@@ -8,7 +8,7 @@ import firebase from 'firebase';
 import * as ROUTES from "../../const/routes"
 
 const SignInPage = () => (
-  <div classname = "sign-in">
+  <div className = "sign-in">
     <h2>Sign In</h2>
     <SignInForm />
     <PasswordForgetLink />
@@ -29,19 +29,6 @@ class SignInFormBase extends Component {
 
     this.state = { ...INITIAL_STATE };
   }
-
-  // async onSubmit(e) {
-  //   e.preventDefault();
-  //   const { email, password } = this.state;
-
-  //   try {
-  //     this.props.firebase.doSignInWithEmailAndPassword(email, password);
-  //     this.setState({ ...INITIAL_STATE });
-  //     this.props.history.push(ROUTES.HOME);
-  //   } catch (e) {
-  //     console.log(e.code);
-  //   }
-  // }
 
   onSubmit = event => {
     const { email, password } = this.state;

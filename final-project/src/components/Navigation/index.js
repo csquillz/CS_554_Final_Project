@@ -19,17 +19,6 @@ const NavigationAuth = (props) => (
   <div className="root">
                 <header className="toolbar toolbar-header">
                     <div className="toolbar-actions">
-                        {/* <div className="btn-group">
-                            <button className="btn btn-default">
-                                <span className="icon icon-left-open"></span>
-                            </button>
-                            <button className="btn btn-default">
-                                <span className="icon icon-right-open"></span>
-                            </button>
-                            <button className="btn btn-default">
-                                <span className="icon icon-dot-3"></span>
-                            </button>
-                        </div> */}
                         <Link to={ROUTES.HOME}>
                         <button className="btn btn-default">
                             <span className="icon icon-home icon-text"></span>
@@ -61,17 +50,6 @@ const NavigationNonAuth = (props) => (
 <div className="root">
                 <header className="toolbar toolbar-header">
                     <div className="toolbar-actions">
-                        {/* <div className="btn-group">
-                            <button className="btn btn-default">
-                                <span className="icon icon-left-open"></span>
-                            </button>
-                            <button className="btn btn-default">
-                                <span className="icon icon-right-open"></span>
-                            </button>
-                            <button className="btn btn-default">
-                                <span className="icon icon-dot-3"></span>
-                            </button>
-                        </div> */}
                         <Link to={ROUTES.LANDING}>
                         <button className="btn btn-default">
                             <span className="icon icon-home icon-text"></span>
